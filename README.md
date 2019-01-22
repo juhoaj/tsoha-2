@@ -17,18 +17,10 @@ Lukija voi valita seuraavansa haluamiansa avainsanoja.
 Järjestelmän ylläpitäjällä on oma liittymä, jonka kautta hän näkee palvelun käyttäjät, voi siivota kirjoituskantaa ja määrittellä avainsanoja.
 
 
-#Toimintoja:
-
-* Kirjautuminen ja tilin luominen
-* Kirjoituksen lisääminen
-* Kirjoitusten näyttäminen eri kriteerein
-* Kirjoituksen vastineiden näyttäminen
-* Ryhmän jäsenen lisääminen, muokkaaminen ja poistaminen
-* Vastineen laatiminen
-* Kirjoitusten ja vastineiden poistaminen
-* Avainsanojen määrittely, muokkaus ja poisto
+#Backlog
+[Taagi - backlog] (https://github.com/juhoaj/tsoha-2/blob/master/documentation/kayttotapaukset.md)
 
 
 # Tietokantakaavio
 
-[Taagi - tietokantakaavio] [https://www.lucidchart.com/documents/view/ab202bbd-aae6-4e13-90b8-5adfee5d14eb/0]
+[Taagi - tietokantakaavio] (https://www.lucidchart.com/documents/view/ab202bbd-aae6-4e13-90b8-5adfee5d14eb/0)
