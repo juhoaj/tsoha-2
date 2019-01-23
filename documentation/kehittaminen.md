@@ -1,4 +1,16 @@
 
+### Projektin rakenne
+
+'── application
+│   ├── src - sisältää frontendin lähdekoodin (scss)
+│   ├── static - sisältää frontendin lähteet (css jne.)
+│   ├── tasks
+│   ├── templates
+├── package.json - sisältää frontendin riippuvuudet
+├── requirements.txt - virtuaaliympäristön riippuvuudet
+├── Procfile - ohjeistus tiedoston käynnistämiseen Herokussa
+...'
+
 ### Backend
 Noudattaa materiaalin esimerkkejä.
 
@@ -18,7 +30,7 @@ Gulp-taski kääntää tarvittavat tiedostot ja tallentaa ne /application/static
 
   * 'build' - kääntää tiedostot ja laittaa ne oikeille paikoilleen /application/static kansion alle
   * 'watch' - kuten build mutta havaitessaan muutoksia application/sources/scss -kansioissa kääntää muuttuneet tiedostot ja opioi ne /application/static/scss -kansioon
-  * 'update' - kopioi Bootstrapin npm-paketista /application/src -kansioon
+  * 'update' - kopioi Bootstrapin npm-paketista tarvittavat tiedostot /application/src -kansioon
 
 Pääriippuvuudet:
   * Bootstrap 

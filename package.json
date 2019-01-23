@@ -1,0 +1,8 @@
+{
+  "name": "tsoha-taagi",
+  "version": "0.0.0",
+  "description": "Frontend for tsoha lab exercise",
+  "dependencies": {
+    "bootstrap": "^4.2.1"
+  }
+}
