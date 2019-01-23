@@ -1,27 +1,32 @@
 # Taagi-tietokantasovellus, periodi III, 2018-19
 
-### Työn aiheena on keskustelufoorumi
+### Tsoha periodi III, 2018-19
 
-Harjoitustyön idea noudattaa pitkälti viikon 1 "Keskustelufoorumia". Suurimpana muutoksena on, että aiheryhmien sijasta viestejä ryhymitellään avainsanoilla. Yhteen viestiin voi liittyä useampi avainsana.
+Taagi on keskustelufoorumi jossa viestejä jaotellaan aiheryhmien sijasta liittämällä ne avainsanoihin. Yhteen viestiin voi liittää useamman avainsanan. 
 
-Käyttäjä voi lukea järjestelmän tallennettuja viestejä ja lisätä tietokantaan uusia viestejä jotka voivat olla myös vastineita aiempiin kirjoituksiin. 
+Aloitusnäkymässä näytetään kaikki viestit aikajärjestyksessä. Näkymässä on apunavigaatio jossa on listattu kaikki avainsanat. Niitä klikkaamalla siirrytään avainsanakohtaiseen näkymään jossa listataan kaikki avainsanaan liitetyt viestit. 
 
-Kirjoituksia voi hakea kirjoittajan nimen tai aiheen, mahdollisesti myös artikkelin iän perusteella. 
+Lukija voi valita seuraavansa haluamiansa avainsanoja. Hänellä on oma näkymä jossa näytetään viestit jotka ovat liitetty hänen avainsanoihinsa. 
 
-Oletusarvoisesti lukijalle näytetään kaikki artikkelit varustettuna informaatiolla siitä onko lukija itse nähnyt artikkelin ja onko viestille vastauksia joita käyttäjä ei ole vielä nähnyt.
+Foorumi ylläpitää tietoa mitkä käyttäjät ovat lukeneet viestit ja niiden vastaukset. Viestit ja vastaukset, joita käyttäjä ei ole lukenut korostetaan käyttöliittymässä.
 
-Lukija identifioi aina itsensä ja artikkeleihin liitetään tieto henkilöistä jotka ovat lukeneet ne. Tämä tieto on kaikkien lukijoiden saatavissa.
+Käyttäjän on luotava itsellensä käyttäjätili. Kaikki käyttäjät voivat lukea viestejä sekä vastata niihin. Viesti ja sen vastaukset muodostavat ketjun.
 
-Lukija voi valita seuraavansa haluamiansa avainsanoja.
+Viestejä voi hakea (viestin, ei vastauksen) kirjoittajan nimen tai aiheen, mahdollisesti myös artikkelin iän perusteella. 
 
-Järjestelmän ylläpitäjällä on oma liittymä, jonka kautta hän näkee palvelun käyttäjät, voi siivota kirjoituskantaa ja määrittellä avainsanoja.
+Foorumin ylläpitäjällä on oma liittymä jonka kautta hän näkee palvelun käyttäjät, voi siivota kirjoituskantaa ja määrittellä avainsanoja.
 
+Harjoitustyön idea noudattaa pitkälti viikon 1 "Keskustelufoorumia".
+
+Sovellus on nähtävissä osoitteessa [#](#)
 
 ### Backlog
 
 [Taagi - backlog](https://github.com/juhoaj/tsoha-2/blob/master/documentation/kayttotapaukset.md)
 
 
-### Tietokantakaavio
+### Dokumentaatio
 
-[Taagi - tietokantakaavio](https://www.lucidchart.com/documents/view/ab202bbd-aae6-4e13-90b8-5adfee5d14eb/0)
+  * [Tietokantakaavio](https://www.lucidchart.com/documents/view/ab202bbd-aae6-4e13-90b8-5adfee5d14eb/0)
+  * [Ympäristöt ja riippuvuudet](https://github.com/juhoaj/tsoha-2/blob/master/documentation/ymparisto.md)
+  * [Sovelluksen polut](https://github.com/juhoaj/tsoha-2/blob/master/documentation/polut.md)
