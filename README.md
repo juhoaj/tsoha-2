@@ -28,5 +28,5 @@ Sovellus on nähtävissä osoitteessa [#](#)
 ### Dokumentaatio
 
   * [Tietokantakaavio](https://www.lucidchart.com/documents/view/ab202bbd-aae6-4e13-90b8-5adfee5d14eb/0)
-  * [Ympäristöt ja riippuvuudet](https://github.com/juhoaj/tsoha-2/blob/master/documentation/ymparisto.md)
+  * [Kehittäminen ja riippuvuudet](https://github.com/juhoaj/tsoha-2/blob/master/documentation/kehittaminen.md)
   * [Sovelluksen polut](https://github.com/juhoaj/tsoha-2/blob/master/documentation/polut.md)
