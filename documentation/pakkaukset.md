@@ -22,6 +22,4 @@
   * GET /kirjaudu näyttää kirjautumisnäkymän
   * POST /kirjaudu lähettää kirjautumisen
   * POST /kirjaudu/uusi lähettää uuden käyttäjän
-
-'admin' -pakkaus ???tarvitaanko??? meneekö 'auktorisointi' alle?
   * GET /admin näyttää ylläpidon ylläpitäjille
