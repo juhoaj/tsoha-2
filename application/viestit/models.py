@@ -7,8 +7,8 @@ class Viesti(db.Model):
     # onupdate=db.func.current_timestamp())
     # kayttajanimi = db.Column(db.String(144), nullable=False)
     otsikko = db.Column(db.String(144), nullable=False)
-    sisalto = db.Column(db.String(144), nullable=False)
+    # sisalto = db.Column(db.String(144), nullable=False)
 
-    def __init__(self, otsikko, sisalto):
+    def __init__(self, otsikko):
         self.otsikko = otsikko
-        self.sisalto = sisalto
+        # self.sisalto = sisalto

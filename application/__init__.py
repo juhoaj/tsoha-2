@@ -10,7 +10,7 @@ from flask_sqlalchemy import SQLAlchemy
 # Käytetään tasks.db-nimistä SQLite-tietokantaa. Kolme vinoviivaa
 # kertoo, tiedosto sijaitsee tämän sovelluksen tiedostojen kanssa
 # samassa paikassa
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///tasks.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///kanta.db"
 # Pyydetään SQLAlchemyä tulostamaan kaikki SQL-kyselyt
 app.config["SQLALCHEMY_ECHO"] = True
 
@@ -20,7 +20,10 @@ db = SQLAlchemy(app)
 # Luetaan kansiosta application tiedoston views sisältö
 from application import views
 
-from application.kayttaja import models
+from application.auktorisointi import models
+
+from application.viestit import models
+from application.viestit import views
 
 # Luodaan lopulta tarvittavat tietokantataulut
 db.create_all()
