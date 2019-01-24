@@ -29,4 +29,4 @@ Sovellus on nähtävissä osoitteessa [#](#)
 
   * [Tietokantakaavio](https://www.lucidchart.com/documents/view/ab202bbd-aae6-4e13-90b8-5adfee5d14eb/0)
   * [Kehittäminen ja riippuvuudet](https://github.com/juhoaj/tsoha-2/blob/master/documentation/kehittaminen.md)
-  * [Sovelluksen polut](https://github.com/juhoaj/tsoha-2/blob/master/documentation/polut.md)
+  * [Sovelluksen pakkaukset ja polut](https://github.com/juhoaj/tsoha-2/blob/master/documentation/pakkaukset.md)

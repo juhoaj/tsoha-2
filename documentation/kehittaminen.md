@@ -15,6 +15,7 @@
 Noudattaa materiaalin esimerkkejä.
 
 Kehittämisen loitsut juuresta:
+* virtuaaliympäristöjen aktivointi 'source venv/bin/activate'
 * pakettien hakeminen 'pip install -r requirements.txt' 
 * käynnistäminen lokaalisti 'python run.py'
 

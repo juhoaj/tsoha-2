@@ -1,3 +1,5 @@
+# coding=utf-8
+# Tuodaan Flask käyttöön
 from flask import Flask
 app = Flask(__name__)
 
@@ -18,7 +20,7 @@ db = SQLAlchemy(app)
 # Luetaan kansiosta application tiedoston views sisältö
 from application import views
 
-from application.tasks import models
+from application.kayttaja import models
 
 # Luodaan lopulta tarvittavat tietokantataulut
 db.create_all()
