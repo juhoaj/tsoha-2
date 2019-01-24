@@ -1,5 +1,5 @@
-from application import app, db
-from flask import render_template, request
+from application import app, db, views
+from flask import redirect, render_template, request, url_for
 from application.viestit.models import Viesti
 
 @app.route("/viesti/uusi/")
@@ -12,4 +12,4 @@ def viesti_luo():
     db.session().add(t)
     db.session().commit()
 
-    return "lisäilty!"
+    return redirect(url_for("index"))

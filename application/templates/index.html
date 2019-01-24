@@ -1,7 +1,11 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <p>
-    Hello world!
-  </p>
+    <h1>Taagi</h1>
+    <a href="/viesti/uusi">+lisää uusi viesti</a>
+    <ul>
+        {% for viesti in viestit %}
+            <li>{{ viesti.otsikko }}</li>
+        {% endfor %}
+    </ul>
 {% endblock %}

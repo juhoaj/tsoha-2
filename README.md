@@ -18,7 +18,7 @@ Foorumin ylläpitäjällä on oma liittymä jonka kautta hän näkee palvelun k�
 
 Harjoitustyön idea noudattaa pitkälti viikon 1 "Keskustelufoorumia".
 
-Sovellus on nähtävissä osoitteessa [#](#)
+Sovellus on nähtävissä osoitteessa [https://tsoha-taagi.herokuapp.com](https://tsoha-taagi.herokuapp.com)
 
 ### Backlog
 

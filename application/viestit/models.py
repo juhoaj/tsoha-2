@@ -12,3 +12,6 @@ class Viesti(db.Model):
     def __init__(self, otsikko):
         self.otsikko = otsikko
         # self.sisalto = sisalto
+
+    def get_id(self):
+        return self.id
