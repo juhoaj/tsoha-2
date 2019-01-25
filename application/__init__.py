@@ -23,5 +23,8 @@ from application.auktorisointi import models
 from application.viestit import models
 from application.viestit import views
 
+from application.tagit import models
+from application.tagit import views
+
 # Luodaan lopulta tarvittavat tietokantataulut
 db.create_all()

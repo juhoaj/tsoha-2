@@ -9,7 +9,7 @@ class Kayttaja(db.Model):
     salasana = db.Column(db.String(144), nullable=False)
     yllapitaja = db.Column(db.Boolean, nullable=False)
 
-    def __init__(self, name, salasana):
-        self.name = name
-        self.name = salasana
+    def __init__(self, nimi, salasana):
+        self.nimi = nimi
+        self.salasana = salasana
         self.yllapitaja = False

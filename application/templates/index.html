@@ -2,7 +2,8 @@
 
 {% block body %}
     <h1>Taagi</h1>
-    <a href="/viesti/uusi">+lisää uusi viesti</a>
+    <p><a href="{{ url_for('tagi_hallinta') }}">Tagien ylläpito</a></p>
+    <p><a href="{{ url_for('viesti_muokkaa_uusi') }}">+lisää uusi viesti</a></p>
     <ul>
         {% for viesti in viestit %}
             <li>{{ viesti.otsikko }}</li>

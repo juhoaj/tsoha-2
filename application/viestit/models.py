@@ -1,6 +1,7 @@
 from application import db
 
 class Viesti(db.Model):
+    __tablename__ = 'viesti'
     id = db.Column(db.Integer, primary_key=True)
     luotu = db.Column(db.DateTime, default=db.func.current_timestamp())
     # date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
