@@ -14,6 +14,7 @@
   * Käyttäjä voi tarkastella valittuun tagiin liitettyjä viestejä
   * Käyttäjä voi valita tageja seurattavaksi
   * Käyttäjä näkee seuraamiinsa tageihin liitetyt viestit
+  * "toisesta tietokohteesta myös päivitys ja poisto"
 
   * Käyttäjän lukemista viesteistä ja vastauksista pidetään kirjaa
   * Lukemattomat viestit / vastaukset korostetaan
