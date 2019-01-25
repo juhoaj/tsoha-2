@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+<form method="POST" action="{{ url_for('tagi_paivita', tagi_id=tagi.id) }}">
+    <label>uusi nimi</label>
+    <input type="text" name="nimi"/>
+    <input type="submit" value="Muokkaa"/>
+</form>
+{% endblock %}
