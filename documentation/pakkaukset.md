@@ -1,4 +1,4 @@
-## Sovelluksen pakkaukset, polut ja funktiot
+## Sovelluksen pakkaukset, routet ja funktiot
 
 `viestit` -pakkaus näyttää viestit ja hallinnoi viestejä, bonuksena haku
   * GET / näyttää kaikki viestit
@@ -17,7 +17,7 @@
   * GET /tagi_hallinta/uusi kirjoitusnäkymä uudelle tagille `tagi_muokkaa_uusi`
   * GET /tagi_hallinta/#/muokkaa näyttää tagin # muokkausnäkymän `tagi_muokkaa`
   * POST /tagi_hallinta lähettää uuden tagin `tagi_uusi`
-  * POST /tagi_hallinta/* päivittää tagin # `tagi_paivita`
+  * POST /tagi_hallinta/# päivittää tagin # `tagi_paivita`
 
 
 `vastaukset` -pakkaus näyttää viestin ja sen vastaukset, hallinnoi vastauksia 
