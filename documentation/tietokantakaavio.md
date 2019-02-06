@@ -1,1 +1,0 @@
-[Taagi - tietokantakaavio] (https://www.lucidchart.com/documents/view/ab202bbd-aae6-4e13-90b8-5adfee5d14eb/0)
