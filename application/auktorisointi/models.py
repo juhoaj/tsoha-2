@@ -10,6 +10,21 @@ class Kayttaja(db.Model):
     yllapitaja = db.Column(db.Boolean, nullable=False)
 
     def __init__(self, nimi, salasana):
-        self.nimi = nimi
+        self.kayttajanimi = nimi
         self.salasana = salasana
         self.yllapitaja = False
+
+    def get_id(self):
+        return self.id
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def is_authenticated(self):
+        return True
+
+    def is_adminstrator(self):
+        return self.yllapitaja

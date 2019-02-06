@@ -19,6 +19,7 @@ db = SQLAlchemy(app)
 from application import views
 
 from application.auktorisointi import models
+from application.auktorisointi import views
 
 from application.viestit import models
 from application.viestit import views

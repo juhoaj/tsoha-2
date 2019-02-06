@@ -1,0 +1,14 @@
+
+{% block body %}
+
+<p>Sivuston käyttäjät</p>
+
+{% for kayttaja in kayttajat %}
+
+    <div>
+        <p class="large">{{ kayttaja.kayttajanimi }} <a href="{{ url_for('kayttaja', kayttaja_id=kayttaja.id) }}">muokkaa</a> </p>
+    </div>
+  
+{% endfor %}
+
+{% endblock %}

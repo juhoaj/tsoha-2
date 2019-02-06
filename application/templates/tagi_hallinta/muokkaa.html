@@ -1,9 +1,11 @@
 {% extends "layout.html" %}
   
 {% block body %}
+<p><a href="{{ url_for('tagi_hallinta') }}">Peru</a></p>
 <form method="POST" action="{{ url_for('tagi_paivita', tagi_id=tagi.id) }}">
     <label>uusi nimi</label>
-    <input type="text" name="nimi"/>
+    {{ form.nimi }}
     <input type="submit" value="Muokkaa"/>
 </form>
+<button>poista tagi</button>
 {% endblock %}

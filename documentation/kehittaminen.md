@@ -17,7 +17,7 @@
 Noudattaa materiaalin esimerkkejä.
 
 Kehittämisen loitsut juuresta:
-* pakettien hakeminen `pip install -r requirements.txt`
+* pakettien hakeminen repositiosta hakemisen jälkeen `pip install -r requirements.txt`
 * virtuaaliympäristöjen aktivointi `source venv/bin/activate`
 * käynnistäminen lokaalisti `python run.py`
 
@@ -26,8 +26,13 @@ Pääriippuvuudet:
   * SQLAlchemy - SQL-loitsinnan helpottaamiseen
   * Gunicorn - sovelluksen käynnistämiseksi Herokussa
 
+
 ### Frontend tooling, todo
-Poikkeaa materiaalin esimerkistä jotta Boostrap olisi elegantimmin muokattavissa. Front-endin tarvitsemat paketit haetaan NPM:llä. Kehittämistä varten paketit pitää ensin käydä hakemassa loitsimalla projektin juuressa `npm i`.
+*Katselmointia varten ei tarvitse asentaa mitään*.
+
+_Frontin kääntäminen kehittämistä varten:_ 
+
+Front-endin kääntämiseen tarvitsemat paketit haetaan NPM:llä. Kehittämistä varten paketit pitää ensin käydä hakemassa loitsimalla projektin juuressa `npm i`. 
 
 Automaatiota hoitaa Gulp koska Webpack vaikuttaa hieman raskaalle projektia varten. Gulp-taski kääntää tarvittavat tiedostot ja tallentaa ne /application/static kansioon. Gulpia varten on tarjolla seuraavat loitsut jotka ovat loitsittavissa juuresta:
 
@@ -35,7 +40,7 @@ Automaatiota hoitaa Gulp koska Webpack vaikuttaa hieman raskaalle projektia vart
   * `watch` - kuten build mutta havaitessaan muutoksia application/sources/scss -kansioissa kääntää muuttuneet tiedostot ja opioi ne /application/static/scss -kansioon
   * `update` - kopioi Bootstrapin npm-paketista tarvittavat tiedostot /application/src -kansioon
 
-Pääriippuvuudet:
+Front-endin pääriippuvuudet:
   * Bootstrap 
   * Sass - css-tiedostojen kääntämistä varten
   * Gulp - automatisointi 

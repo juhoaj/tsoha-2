@@ -1,14 +1,13 @@
 ## Sovelluksen pakkaukset, routet ja funktiot
 
 `viestit` -pakkaus näyttää viestit ja hallinnoi viestejä, bonuksena haku
-  * GET / näyttää kaikki viestit
-  * GET /viesti/# näyttää viestin jonka id on #
+  * GET / näyttää kaikki viestit `index`
+  * GET /viesti/# näyttää viestin jonka id on # `viesti`
   * GET /viesti/#/lukijat näyttää viestin # lukijat
   * GET /viesti/uusi kirjoitusnäkymä uudelle viestille `viesti_muokkaa_uusi`
   * POST /viesti lähettää uuden viestin `viesti_uusi`
   * GET /haku näyttää haun tulokset
   * POST /haku lähettää uuden haun
-
 
  `tagit` -pakkaus tägien hallinta ja niihin liitettyjen viestien näyttäminen. tarjoaa listan kaikista ja käyttäjän tageista.
   * GET /tagi/nimi_tahi_# näyttää tagin 'nimi' tahi # näkymän ?????? `tagi` 
@@ -18,6 +17,7 @@
   * GET /tagi_hallinta/#/muokkaa näyttää tagin # muokkausnäkymän `tagi_muokkaa`
   * POST /tagi_hallinta lähettää uuden tagin `tagi_uusi`
   * POST /tagi_hallinta/# päivittää tagin # `tagi_paivita`
+  * POST /tagi_hallinta/#/poista poistaa tagin # jos poista-kentän value="jebateukka" `tagi_poista`
 
 
 `vastaukset` -pakkaus näyttää viestin ja sen vastaukset, hallinnoi vastauksia 
@@ -26,9 +26,14 @@
   * POST /viesti/# lähettää uuden vastauksen viestiin jonka id on #
  
 
-`auktorisointi` -pakkaus käyttäjänhallinta ja kirjautuminen
-  * GET /kirjaudu näyttää kirjautumisnäkymän
-  * POST /kirjaudu lähettää kirjautumisen
-  * POST /kirjaudu/uusi lähettää uuden käyttäjän
-  * GET /admin näyttää ylläpidon ylläpitäjille
+`auktorisointi` -pakkaus käyttäjänhallintaan ja kirjautumiseen
+  * GET /kirjaudu näyttää kirjautumisnäkymän ja ottaa vastaan kirjautumisen `kirjaudu`
+  * GET /luo_tili syötä uusi käyttäjä `kayttaja_muokkaa_uusi`
+  * POST /luo_tili lähettää uuden käyttäjän `kayttaja_uusi`
+  * GET /asetukset paikka mistä pääsee vaihtamaan salasanan `kayttaja` 
+  * GET /asetukset/#/paivita vaihda käyttäjän # salasana `kayttaja_muokkaa`
+  * POST /asetukset/# päivittää käyttäjän # salasanan `kayttaja_paivita`
+  * GET /hallinta näyttää ylläpidon ylläpitäjille `yllapito`
+  * GET /hallinta/kayttajat paikka mistä näkee käyttäjät `kayttaja_hallinta` 
+  * POST /asetukset/#/poista poistaa käyttäjän # jos poista-kentän value="jebateukka" `kayttaja_poista`
     

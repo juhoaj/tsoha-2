@@ -1,0 +1,33 @@
+{% block body %}
+
+<p><a href="{{ url_for('kirjaudu') }}">Peruuta</a></p>
+
+{{ viesti }}
+<form method="POST" action="{{ url_for('kayttaja_uusi') }}">
+  <table>
+    <tr>
+      <td>
+	{{ form.kayttajanimi.label }}
+      </td>
+      <td>
+	{{ form.kayttajanimi }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+	{{ form.salasana.label }}
+      </td>
+      <td>
+	{{ form.salasana }}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+	<input type="submit" value="Login"/>
+      </td>
+    </tr>
+</form>
+
+
+
+{% endblock %}
