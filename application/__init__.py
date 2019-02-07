@@ -3,14 +3,15 @@
 from flask import Flask
 app = Flask(__name__)
 
-# Tuodaan SQLAlchemy käyttöön
 from flask_sqlalchemy import SQLAlchemy
-# Käytetään tasks.db-nimistä SQLite-tietokantaa. Kolme vinoviivaa
-# kertoo, tiedosto sijaitsee tämän sovelluksen tiedostojen kanssa
-# samassa paikassa
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///kanta.db"
-# Pyydetään SQLAlchemyä tulostamaan kaikki SQL-kyselyt
-app.config["SQLALCHEMY_ECHO"] = True
+
+import os
+
+if os.environ.get("HEROKU"):
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("postgresql-rectangular-33794")
+else:
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///kanta.db"    
+    app.config["SQLALCHEMY_ECHO"] = True
 
 # Luodaan db-olio, jota käytetään tietokannan käsittelyyn
 db = SQLAlchemy(app)
@@ -43,5 +44,7 @@ def load_user(user_id):
     return Kayttaja.query.get(user_id)
 
 
-# Luodaan lopulta tarvittavat tietokantataulut
-db.create_all()
+try: 
+    db.create_all()
+except:
+    pass
