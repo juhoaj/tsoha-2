@@ -3,6 +3,13 @@
   "version": "0.0.0",
   "description": "Frontend for tsoha lab exercise",
   "dependencies": {
-    "bootstrap": "^4.2.1"
+    "browser-sync": "^2.26.3"
+  },
+  "devDependencies": {
+    "bootstrap": "^4.2.1",
+    "font-awesome": "^4.7.0",
+    "gulp": "^4.0.0",
+    "gulp-sass": "^4.0.2",
+    "jquery": "^3.3.1"
   }
 }

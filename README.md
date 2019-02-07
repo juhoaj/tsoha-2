@@ -16,7 +16,7 @@ Foorumin ylläpitäjällä on oma liittymä jonka kautta hän näkee palvelun k�
 
 Mikäli aika riittää niin lisätään foorumiin kirjanpito siitä mitkä käyttäjät ovat lukeneet viestit ja niiden vastaukset. Näin viestit ja vastaukset, joita käyttäjä ei ole lukenut korostetaan käyttöliittymässä.
 
-Harjoitustyön idea noudattaa pitkälti viikon 1 "Keskustelufoorumia".
+Harjoitustyön idea noudattaa pitkälti viikon 1 tehtäväideoiden "Keskustelufoorumia".
 
 Sovellus on nähtävissä osoitteessa [https://tsoha-taagi.herokuapp.com](https://tsoha-taagi.herokuapp.com)
 

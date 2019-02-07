@@ -36,11 +36,12 @@ Front-endin kääntämiseen tarvitsemat paketit haetaan NPM:llä. Kehittämistä
 
 Automaatiota hoitaa Gulp koska Webpack vaikuttaa hieman raskaalle projektia varten. Gulp-taski kääntää tarvittavat tiedostot ja tallentaa ne /application/static kansioon. Gulpia varten on tarjolla seuraavat loitsut jotka ovat loitsittavissa juuresta:
 
-  * `build` - kääntää tiedostot ja laittaa ne oikeille paikoilleen /application/static kansion alle
-  * `watch` - kuten build mutta havaitessaan muutoksia application/sources/scss -kansioissa kääntää muuttuneet tiedostot ja opioi ne /application/static/scss -kansioon
-  * `update` - kopioi Bootstrapin npm-paketista tarvittavat tiedostot /application/src -kansioon
+  * `build` - kääntää /application/static/scss -kansion scss tiedostot ja laittaa ne /application/static/css kansion alle
+  * `watch` - kuten build mutta havaitessaan muutoksia application/sources/scss, sekä aplication/templates/* -kansioissa kääntää muuttuneet scss tiedostot ja lähettää muutokset browsersyncille
+  * `update` - kopioi npm-paketeista tarvittavat tiedostot /application/static -kansion alle
 
 Front-endin pääriippuvuudet:
   * Bootstrap 
   * Sass - css-tiedostojen kääntämistä varten
   * Gulp - automatisointi 
+  * Browsersync - selainikkunan päivitys

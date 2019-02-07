@@ -1,6 +1,8 @@
-from application import app, db, views
 from flask import redirect, render_template, request, url_for
 # from application.viestit.models import Viesti
+from flask_login import login_user
+
+from application import app, db, views
 from application.auktorisointi.models import Kayttaja
 from application.auktorisointi.forms import LoginForm
 

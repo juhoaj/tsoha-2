@@ -14,7 +14,7 @@ def tagi_hallinta():
 def tagi_muokkaa_uusi():
     return render_template("tagi_hallinta/uusi.html", form=TagiForm())
 
-@app.route("/tagi_hallinta/", methods=["POST"])
+@app.route("/hallinta/tagit/", methods=["POST"])
 def tagi_uusi():
     form = TagiForm(request.form)
 
