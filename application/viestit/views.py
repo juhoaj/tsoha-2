@@ -1,20 +1,24 @@
 from application import app, db, views
 from flask import redirect, render_template, request, url_for
+from flask_login import login_required
+
 from application.viestit.models import Viesti
 from application.viestit.forms import ViestiForm
 
-@app.route("/viesti/uusi/")
+@app.route("/viesti/uusi")
+@login_required
 def viesti_muokkaa_uusi():
     return render_template("viesti/uusi.html", form = ViestiForm())
 
-@app.route("/viesti/", methods=["POST"])
+@app.route("/viesti", methods=["POST"])
+@login_required
 def viesti_uusi():
     form = ViestiForm(request.form)
 
     if not form.validate():
         return render_template("viesti/uusi.html", form = form)
     
-    t = Viesti(form.otsikko.data)
+    t = Viesti(form.otsikko.data, form.sisalto.data)
     db.session().add(t)
     db.session().commit()
 
@@ -22,7 +26,7 @@ def viesti_uusi():
 
 # viestin näyttäminen
 
-@app.route("/viesti/<viesti_id>/")
+@app.route("/viesti/<viesti_id>")
 def viesti(viesti_id):
     # form = VastausForm(request.form)
 

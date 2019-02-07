@@ -5,8 +5,8 @@
   * ! Käyttäjä voi kirjautua palveluun / palvelusta pois
   * Käyttäjä voi vaihtaa salasanansa
   * Käyttäjä voi olla ylläpitäjä
-  * Ylläpitäjän näkymässä näkee käyttäjät
-  * Ylläpitäjä voi lisätä / poistaa ylläpitäjiä 
+  * (Vain) ylläpitäjän näkymässä näkee käyttäjät
+  * (Vain) ylläpitäjä voi lisätä / poistaa ylläpitäjiä 
 
 2) Viestit
   * ! Aloitusnäkymässä käyttäjä näkee viestilistauksen (kaikkien viestien otsikoista)
@@ -20,7 +20,7 @@
   * (Out of scope?) Viestilistausta voi rajata ajan perusteella
 
 3) Tagit
-  * ! Ylläpitäjä voi lisätä, poistaa ja muokata (nimi) tageja ylläpitonäkymässä
+  * ! (Vain) ylläpitäjä voi lisätä, poistaa ja muokata (nimi) tageja ylläpitonäkymässä
   * ! Käyttäjä voi tarkastella valittuun tagiin liitettyjä viestejä viestilistauksessa
   * Käyttäjä voi valita tageja seurattavaksi
   * Käyttäjä näkee seuraamiinsa tageihin liitetyt viestit viestilistauksena
@@ -28,9 +28,11 @@
 ## Käyttäjätapaukset done
   * Käyttäjä näkee tietokannasta tietoa sivulla
 
-## Tekniset stoorit todo vko 3-4
+## Tekniset stoorit todo 
   * PostgreSQL Herokussa
   * Tageissa CRUD (liitostaulun siivous)
   * Sovelluksessa on ainakin yksi monimutkaisempi yhteenvetokysely, jonka tulokset näytetään käyttäjälle.
   * BS
   * Kenttien validointi
+  * suojattuihin urleihin myös tarkastus että käyttäjä on ylläpitäjä
+  * vain käyttäjä tai ylläpitäjä voi muuttaa käyttäjän oman salasanansa

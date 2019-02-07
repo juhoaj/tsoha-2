@@ -4,6 +4,7 @@
 <p><a href="{{ url_for('index') }}">Peru</a></p>
 <form method="POST" action="{{ url_for('viesti_uusi') }}">
     {{ form.otsikko }}
+    {{ form.sisalto }}
     <input type="submit" value="Lisää uusi viesti"/>
     {% for error in form.otsikko.errors %}
         <p>{{ error }}</p>
