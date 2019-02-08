@@ -10,7 +10,7 @@ from application.viestit.forms import ViestiForm
 @login_required
 def viesti_muokkaa_uusi():
     tagit = Tagi.query.all()
-    return render_template("viesti/uusi.html", form = ViestiForm(), tagit=tagit)
+    return render_template("viesti/uusi.html", form = ViestiForm())
 
 @app.route("/viesti", methods=["POST"])
 @login_required
@@ -26,7 +26,7 @@ def viesti_uusi():
     db.session().flush()
 
 
-    tagit = form.tagit.data
+    # tagit = form.tagit.data
     # for tagi in tagit:
     #     t = Tagitus(int(tagi), viesti.id)
     #     db.session().add(t)

@@ -9,7 +9,7 @@ class MultiCheckboxField(SelectMultipleField):
 class ViestiForm(FlaskForm):
     otsikko = StringField("Viestin otsikko", [validators.Length(min=2)])
     sisalto = TextAreaField("Viestin sisältö", [validators.Length(max=2000)])
-    tagit = MultiCheckboxField('Label', choices= [('1', 'Choice1'), ('2', 'Choice2'), ('3', 'Choice3')] )
+    # tagit = MultiCheckboxField('Label', choices= [('1', 'Choice1'), ('2', 'Choice2'), ('3', 'Choice3')] )
     # tagit = MultiCheckboxField(choices=[(str(t.id), t.nimi) for t in Tagi.query.all()])
     class Meta:
         csrf = False

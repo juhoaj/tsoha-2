@@ -43,7 +43,7 @@ def kayttaja_uusi():
     t = Kayttaja(form.kayttajanimi.data, form.salasana.data)
     db.session().add(t)
     db.session().commit()
-    return redirect(url_for("index"))
+    return redirect(url_for("kirjaudu"))
 
 # asetukset
 @app.route("/asetukset", methods=["GET"])
