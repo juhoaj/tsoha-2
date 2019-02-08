@@ -1,6 +1,74 @@
 @import "./bootstrap/functions";
-@import "./bootstrap/variables";
 @import "./variable_overrides";
+@import "./bootstrap/variables";
 @import "./bootstrap/mixins";
 
-body, h1, p {color:red; }
+
+// -- bs fix
+
+.btn-link {
+    border: none;
+    padding: 0;
+}
+
+
+// --- navi ja header
+
+header {
+    margin-bottom: 3rem;
+}
+
+nav {
+    margin-top: .5rem;
+}
+
+.ylanavi {
+    text-align: right;
+    margin-top: 0.5rem;
+}
+
+.navbar {
+    padding: 0;
+}
+
+
+// --- kirjautuminen
+
+.kirjautuminen {
+    margin-top: 3rem;
+    form {
+        border: 1px solid $hentoharmaa;
+        padding: 2rem;
+    }
+}
+
+
+
+// --- tagilista
+
+.tagilista {
+    margin-bottom: 2rem;
+}
+
+
+// --- viestilista
+
+.viestirivi {
+    border-top: 1px solid $hentoharmaa;
+    &:hover{
+        background-color: $hentooranssi;
+        p {
+            color: $oranssi;
+        } 
+    }
+    p {
+        
+        color: $body-color;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        margin: 0;
+    }
+   
+}

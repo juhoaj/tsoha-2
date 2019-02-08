@@ -1,13 +1,25 @@
 {% extends "layout.html" %}
-  
 {% block body %}
-<p><a href="{{ url_for('index') }}">Peru</a></p>
+
+{% include 'includes/header.html' %}
+
 <form method="POST" action="{{ url_for('viesti_uusi') }}">
-    {{ form.otsikko }}
-    {{ form.sisalto }}
-    <input type="submit" value="Lisää uusi viesti"/>
-    {% for error in form.otsikko.errors %}
-        <p>{{ error }}</p>
-    {% endfor %}
-</form>
-{% endblock %}
+        <div class="form-group">
+            {{ form.otsikko.label }}
+            {{ form.otsikko(class_="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.sisalto.label }}
+            {{ form.sisalto(class_="form-control", rows='10') }}
+        </div>
+        {% if error is defined %}
+        <div class="alert alert-primary" role="alert">
+                {% for error in form.otsikko.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+        </div>
+        {% endif %}
+        <button type="submit" value="Lisää uusi viesti" class="btn btn-link float-right">Lähetä viesti</button>
+    </form>
+
+    {% endblock %}

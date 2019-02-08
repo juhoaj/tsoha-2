@@ -1,13 +1,12 @@
 from sqlalchemy import Column, Table, Integer, ForeignKey
+
 from application import db
+from application.models import Base
 from application.viestit.models import Viesti
 
-class Tagi(db.Model):
+class Tagi(Base):
     __tablename__ = 'tagi'
-    id = db.Column(db.Integer, primary_key=True)
-    # date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
-    # date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
-    # onupdate=db.func.current_timestamp())
+
     nimi = db.Column(db.String(40), nullable=False)
     poistettu = db.Column(db.Boolean, nullable=False)
 

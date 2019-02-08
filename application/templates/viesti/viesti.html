@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+{% include 'includes/header.html' %}
+<h1>{{ viesti.otsikko }}</h1>
+<p class="meta small">#placeholder #placeholder  nimimerkki {{ viesti.luotu }}</p>
+
+<p class="sisalto"> {{viesti.sisalto}}</p>
+
+<hr>
+
+<p>+ uusi vastaus</p>
+
+{% endblock %}

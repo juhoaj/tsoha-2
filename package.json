@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "description": "Frontend for tsoha lab exercise",
   "dependencies": {
-    "browser-sync": "^2.26.3"
+    "browser-sync": "^2.26.3",
+    "popper.js": "^1.14.7"
   },
   "devDependencies": {
     "bootstrap": "^4.2.1",

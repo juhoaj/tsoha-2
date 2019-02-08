@@ -1,6 +1,9 @@
+{% extends "layout.html" %}
 {% block body %}
 
-<p>Taagin ylläpito näkyy</p>
+{% include 'includes/header.html' %}
+
+<p>Taagin ylläpito näkyy jos ylläpitäjä</p>
 
 <p><a href="{{ url_for('tagi_hallinta') }}">Tagien hallinta</a></p>
 <p><a href="{{ url_for('kayttaja_hallinta') }}">Käyttäjien hallinta</a></p>

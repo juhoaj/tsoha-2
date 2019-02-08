@@ -6,7 +6,7 @@ var browserSync = require('browser-sync').create();
 // Update script / Copy the javascript files into our /static/js folder
 gulp.task('update:js', function () {
     return gulp.src([
-        'node_modules/bootstrap/dist/js/bootstrap.min.js', 'node_modules/jquery/dist/jquery.min.js'
+        'node_modules/bootstrap/dist/js/bootstrap.min.js', 'node_modules/jquery/dist/jquery.min.js', 'node_modules/popper.js/dist/popper.min.js'
     ])
         .pipe(gulp.dest("./application/static/js"));
 });

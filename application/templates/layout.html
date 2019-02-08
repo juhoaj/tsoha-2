@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
     <link rel="stylesheet" href="/static/css/styles.css">
-    </head>
-    <title>TodoApp</title>
-  </head>
+</head>
+<title>TodoApp</title>
+</head>
 
-  <body>
+<body>
+    <div class="container site_wrapper">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8 col-xl-7">
 
-    {% if current_user.is_authenticated %}
-    <p>
-    Kirjautunut nimellä {{ current_user.kayttajanimi }} <a href="{{ url_for('kirjaudupois') }}">Kirjaudu ulos</a>
-    
-    </p>
-    {% else %}
-    <a href="{{ url_for('kirjaudu') }}">Kirjaudu</a>
-    {% endif %}
+                {% block body %}
 
-    {% block body %}
+                {% endblock %}
+            </div>
+        </div>
+        <!--./row-->
+        <!--./site_wrapper-->
+        <script src="/static/js/jquery.min.js"></script>
+        <script src="/static/js/popper.min.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
+</body>
 
-    {% endblock %}
-  </body>
 </html>

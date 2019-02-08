@@ -5,6 +5,7 @@ from application import app, db, views
 from application.tagit.models import Tagi
 from application.tagit.forms import TagiForm
 
+# tagien hallinta
 @app.route("/hallinta/tagit/", methods=["GET"])
 @login_required
 def tagi_hallinta():

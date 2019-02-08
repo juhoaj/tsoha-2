@@ -31,4 +31,10 @@ def viesti(viesti_id):
     # form = VastausForm(request.form)
 
     t = Viesti.query.get(viesti_id)
-    return render_template("viesti/index.html", viesti=t )   
+    return render_template("viesti/viesti.html", viesti=t )   
+
+# viestien näyttäminen omista tageista
+@app.route("/omat")
+@login_required
+def omat():
+    return render_template("viesti/omat.html", form = ViestiForm())

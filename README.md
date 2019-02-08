@@ -29,4 +29,4 @@ Sovellus on nähtävissä osoitteessa [https://tsoha-taagi.herokuapp.com](https:
 
   * [Tietokantakaavio](https://github.com/juhoaj/tsoha-2/blob/master/documentation/tietokantakaavio.pdf)
   * [Kehittäminen ja riippuvuudet](https://github.com/juhoaj/tsoha-2/blob/master/documentation/kehittaminen.md)
-  * [Sovelluksen pakkaukset, route ja funktiot](https://github.com/juhoaj/tsoha-2/blob/master/documentation/pakkaukset.md)
+  * [Sovelluksen pakkaukset, route ja funktiot](https://github.com/juhoaj/tsoha-2/blob/master/documentation/reitit.md)

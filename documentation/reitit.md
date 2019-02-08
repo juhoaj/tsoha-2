@@ -2,6 +2,7 @@
 
 `viestit` -pakkaus näyttää viestit ja hallinnoi viestejä, bonuksena haku
   * GET / näyttää kaikki viestit `index`
+  * GET /omat `X` omien tagien näkymä `omat`  
   * GET /viesti/# näyttää viestin jonka id on # `viesti`
   * GET /viesti/#/lukijat näyttää viestin # lukijat
   * GET /viesti/uusi `X` kirjoitusnäkymä uudelle viestille `viesti_muokkaa_uusi`
@@ -11,7 +12,6 @@
 
  `tagit` -pakkaus tägien hallinta ja niihin liitettyjen viestien näyttäminen. tarjoaa listan kaikista ja käyttäjän tageista.
   * GET /tagi/# näyttää tagin 'nimi' tahi # näkymän `tagi` 
-  * GET /omat `X` omien tagien näkymä `omat`
   * GET /tagi_hallinta `X` näyttää tagien hallintanäkymän `tagi_hallinta`
   * GET /tagi_hallinta/uusi `X` kirjoitusnäkymä uudelle tagille `tagi_muokkaa_uusi`
   * GET /tagi_hallinta/#/muokkaa `X` näyttää tagin # muokkausnäkymän `tagi_muokkaa`
