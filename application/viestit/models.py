@@ -11,7 +11,7 @@ class Viesti(Base):
                             nullable=False)
     vastaus = db.Column(db.Integer, nullable=True)
 
-    tagitus = db.relationship('Tagitus', backref='tagin_viestit', lazy=True)
+    # tagitus = db.relationship('Tagitus', backref='tagin_viestit', lazy=True)
 
     def __init__(self, otsikko, sisalto):
         self.otsikko = otsikko
