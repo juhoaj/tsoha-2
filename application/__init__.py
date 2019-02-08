@@ -8,7 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 
 if os.environ.get("HEROKU"):
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("postgresql-rectangular-33794")
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
 else:
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///kanta.db"    
     app.config["SQLALCHEMY_ECHO"] = True
