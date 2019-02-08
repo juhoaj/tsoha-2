@@ -29,10 +29,7 @@
   * Käyttäjä voi luoda uuden viestin
 
 ## Tekniset stoorit todo 
-  * PostgreSQL Herokussa
   * Tageissa CRUD (liitostaulun siivous)
-  * Sovelluksessa on ainakin yksi monimutkaisempi yhteenvetokysely, jonka tulokset näytetään käyttäjälle.
-  * BS
   * Kenttien validointi
-  * suojattuihin urleihin myös tarkastus että käyttäjä on ylläpitäjä
+  * ylläpidon urleihin myös tarkastus että käyttäjä on ylläpitäjä
   * vain käyttäjä tai ylläpitäjä voi muuttaa käyttäjän oman salasanansa
