@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-12 ylanavi">
             {% if current_user.is_authenticated %}
-            <p> Moi {{ current_user.kayttajanimi }} |
+            <p class="small"> Moi {{ current_user.kayttajanimi }} |
                 <a href="{{ url_for('kayttaja') }}">asetukset</a> |
                 <a href="{{ url_for('yllapito') }}">hallinta</a> |
                 <a href="{{ url_for('kirjaudupois') }}">kirjaudu ulos</a>

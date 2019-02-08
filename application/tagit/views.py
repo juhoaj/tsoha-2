@@ -35,8 +35,6 @@ def tagi_muokkaa(tagi_id):
     form = TagiForm(request.form)
 
     t = Tagi.query.get(tagi_id)
-    # iidee = t.id 
-    # db.session().commit()
     return render_template("tagi_hallinta/muokkaa.html", tagi=t, form=TagiForm() )   
 
 @app.route("/hallinta/tagit/<tagi_id>", methods=["POST"])

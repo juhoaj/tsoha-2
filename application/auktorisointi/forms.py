@@ -9,8 +9,8 @@ class LoginForm(FlaskForm):
         csrf = False
 
 class SignupForm(FlaskForm):
-    kayttajanimi = StringField("Käyttäjänimi")
-    salasana = PasswordField("Salasana")
+    kayttajanimi = StringField("Haluamasi käyttäjänimi")
+    salasana = PasswordField("Anna alasana")
     # vahvistaSalasana = PasswordField("Salasana uudestaan")
     
 

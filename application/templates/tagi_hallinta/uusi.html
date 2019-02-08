@@ -1,10 +1,14 @@
 {% extends "layout.html" %}
-  
 {% block body %}
+
+{% include 'includes/header.html' %}
+
 <p><a href="{{ url_for('tagi_hallinta') }}">Peru</a></p>
+
 <form method="POST" action="{{ url_for('tagi_uusi') }}">
     <label>Taagin nimi</label>
     {{ form.nimi }}
     <input type="submit" value="Lisää"/>
 </form>
+
 {% endblock %}

@@ -10,6 +10,7 @@ class Kayttaja(Base):
     yllapitaja = db.Column(db.Boolean, nullable=False)
 
     viestit = db.relationship("Viesti", backref='kayttaja', lazy=True)
+    # seuratut = db.relationship('Seuratut', backref='seuratut_tagit', lazy=True)
 
     def __init__(self, nimi, salasana):
         self.kayttajanimi = nimi

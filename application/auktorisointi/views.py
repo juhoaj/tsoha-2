@@ -4,7 +4,7 @@ from flask_login import login_user, logout_user, login_required
 
 from application import app, db, views
 from application.auktorisointi.models import Kayttaja
-from application.auktorisointi.forms import LoginForm
+from application.auktorisointi.forms import LoginForm, SignupForm
 
 # kirjautuminen
 @app.route("/kirjaudu", methods=["GET", "POST"])
@@ -31,7 +31,7 @@ def kirjaudupois():
 # uusi käyttäjä
 @app.route("/luo_tili", methods=["GET"])
 def kayttaja_muokkaa_uusi():
-    return render_template("auktorisointi/kayttaja_muokkaa_uusi.html", form=LoginForm())
+    return render_template("auktorisointi/kayttaja_muokkaa_uusi.html", form=SignupForm())
 
 # luo uusi käyttäjä
 @app.route("/luo_tili", methods=["POST"])
