@@ -9,7 +9,6 @@ class Tagi(Base):
     __tablename__ = 'tagi'
 
     nimi = db.Column(db.String(40), nullable=False)
-    poistettu = db.Column(db.Boolean, nullable=False)
 
     # tagitus = db.relationship('Tagitus', backref='viestin_tagit', lazy=True)
     # seuraajat = db.relationship("Kayttaja", backref='kayttajan_tagit', lazy=True)
