@@ -23,7 +23,7 @@ def viesti_uusi():
     viesti = Viesti(form.otsikko.data, form.sisalto.data)
     viesti.kayttaja_id = current_user.id
     db.session().add(viesti)
-    db.session().flush()
+    db.session().commit()
 
 
     # tagit = form.tagit.data
