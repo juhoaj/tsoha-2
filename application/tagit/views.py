@@ -9,13 +9,13 @@ from application.tagit.forms import TagiForm
 @app.route("/hallinta/tagit/", methods=["GET"])
 @login_required
 def tagi_hallinta():
-    return render_template("tagi_hallinta/index.html", tagit = Tagi.query.all())
+    return render_template("tagit/index.html", tagit = Tagi.query.all())
 
 # uusi tagi
 @app.route("/hallinta/tagit/uusi")
 @login_required
 def tagi_muokkaa_uusi():
-    return render_template("tagi_hallinta/uusi.html", form=TagiForm())
+    return render_template("tagit/uusi.html", form=TagiForm())
 
 @app.route("/hallinta/tagit", methods=["POST"])
 @login_required
@@ -25,8 +25,7 @@ def tagi_uusi():
     t = Tagi(form.nimi.data)
     db.session().add(t)
     db.session().commit()
-    return redirect(url_for("tagi_hallinta"))
-
+    return redirect(url_for("tagit"))
 
 # tagin muokkaus
 @app.route("/hallinta/tagit/<tagi_id>/muokkaa")
@@ -35,7 +34,7 @@ def tagi_muokkaa(tagi_id):
     form = TagiForm(request.form)
 
     t = Tagi.query.get(tagi_id)
-    return render_template("tagi_hallinta/muokkaa.html", tagi=t, form=TagiForm() )   
+    return render_template("tagit/muokkaa.html", tagi=t, form=TagiForm() )   
 
 @app.route("/hallinta/tagit/<tagi_id>", methods=["POST"])
 @login_required
