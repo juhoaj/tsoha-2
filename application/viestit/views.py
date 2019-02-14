@@ -10,10 +10,22 @@ from application.viestit.forms import ViestiForm
 def index():
     return render_template("viestit/index.html", viestit = Viesti.query.all(), tagit=Tagi.query.all())
 
+# näyttää viestit tagista #
 @app.route("/tagi/<tagi_id>")
 def tagi(tagi_id):
     t = Tagi.query.get(tagi_id)
     return render_template("viestit/tagi.html", tagi=t)
+
+
+@app.route("/tagi/<tagi_id>", methods=["POST"])
+@login_required
+def tagi_uusi():
+    form = TagiForm(request.form)
+
+    t = Tagi(form.nimi.data)
+    db.session().add(t)
+    db.session().commit()
+    return redirect(url_for("tagit"))
 
 # viestien näyttäminen omista tageista
 @app.route("/omat")

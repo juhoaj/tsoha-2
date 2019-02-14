@@ -19,8 +19,7 @@ def tagi_muokkaa_uusi():
 
 @app.route("/hallinta/tagit", methods=["POST"])
 @login_required
-def tagi_uusi():
-    form = TagiForm(request.form)
+def tagi_seuraa():
 
     t = Tagi(form.nimi.data)
     db.session().add(t)
