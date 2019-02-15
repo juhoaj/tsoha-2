@@ -22,10 +22,10 @@ nav {
     padding: 2rem; }
 
 .tagilista {
-  margin-bottom: 2rem; }
-
-.tagi-seuraa p {
+  margin-bottom: 2rem;
   display: inline-block; }
+  .tagilista p {
+    display: inline-block; }
 
 .viestirivi {
   border-top: 1px solid #D8D8D8; }

@@ -26,12 +26,11 @@ class Tagitus(db.Model):
         self.tagi_id = tagi_id
         self.viesti_id = viesti_id
 
-
 class Seuratut(db.Model):
     __tablename__ = 'seuratut'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    tagi_id = db.Column(db.Integer, db.ForeignKey('tagi.id'), primary_key=True)
-    kayttaja_id = db.Column(db.Integer, db.ForeignKey('kayttaja.id'), primary_key=True)
+    tagi_id = db.Column(db.Integer, db.ForeignKey('tagi.id'), nullable=False)
+    kayttaja_id = db.Column(db.Integer, db.ForeignKey('kayttaja.id'), nullable=False)
 
 def __init__(self, tagi_id, kayttaja_id):
     self.tagi_id = tagi_id

@@ -3,10 +3,12 @@
 {% block body %}
 
 {% include 'includes/header.html' %}
-    <form class="tagi-seuraa" method="POST" action="{{ url_for('tagi_seuraa', tagi_id=tagi.id) }}">
-        <p>{{ tagi.nimi }}</p>
-        <input style="display: none;" type="text" name="seuraa" value="kiinnostelee"/>
-        <input type="submit" value="seuraa"/>
+    <form class="tagilista" method="POST" action="{{ url_for('tagi_seuraa', tagi_id=tagi.id) }}">
+        <p>#{{ tagi.nimi }}</p>
+        {% if current_user.is_authenticated %}
+            <input style="display: none;" type="text" name="seuraa" value="kiinnostelee"/>
+            <input type="submit" value="seuraa" class="btn btn-primary btn-sm"/>
+        {% endif %}
     </form>
 
 {% include 'includes/uusiviesti.html' %}

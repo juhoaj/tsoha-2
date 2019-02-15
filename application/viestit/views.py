@@ -15,7 +15,15 @@ def index():
 @app.route("/tagi/<tagi_id>")
 def tagi(tagi_id):
     t = Tagi.query.get(tagi_id)
-    return render_template("viestit/tagi.html", tagi=t)
+
+    stmt=text(" SELECT viesti.id, viesti.otsikko FROM tagitus, viesti " 
+              " WHERE tagitus.tagi_id = :tagi_id "
+              " AND viesti.id = tagitus.viesti_id ").params(tagi_id=tagi_id)
+    res = db.engine.execute(stmt)
+    viestit = []
+    for row in res:
+        viestit.append({"id":row[0], "otsikko":row[1]})
+    return render_template("viestit/tagi.html", tagi=t, viestit=viestit)
 
 # ottaa vastaan tagin seuraamisen ja muuttaa sen tilaa
 @app.route("/tagi/<int:tagi_id>", methods=["POST"])
@@ -23,11 +31,11 @@ def tagi(tagi_id):
 def tagi_seuraa(tagi_id):
     print("-----------------")
     t = request.form.get("seuraa")
-    print(t)
-    
+    print(current_user.id)
     if t == 'kiinnostelee':
-        print("-----------------")
-        # stmt = text("") 
+        stmt=text("INSERT INTO seuratut (tagi_id, kayttaja_id)" 
+                  "VALUES (:tagi, :kayttaja)").params(tagi=tagi_id, kayttaja=1)
+        db.engine.execute(stmt)
     # db.session().add(t)
     # db.session().commit()
     return redirect(url_for("tagi", tagi_id=tagi_id))
@@ -42,7 +50,7 @@ def omat():
 # viestin # näyttäminen
 @app.route("/viesti/<viesti_id>")
 def viesti(viesti_id):
-    # form = VastausForm(request.form)
+
     stmt=text(" SELECT DISTINCT tagi.id, tagi.nimi FROM tagitus, tagi " 
               " WHERE tagitus.viesti_id = :viesti_id "
               " AND tagi.id = tagitus.tagi_id ").params(viesti_id=viesti_id)
