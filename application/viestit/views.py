@@ -43,9 +43,21 @@ def omat():
 @app.route("/viesti/<viesti_id>")
 def viesti(viesti_id):
     # form = VastausForm(request.form)
-
+    stmt=text(" SELECT DISTINCT tagi.id, tagi.nimi FROM tagitus, tagi " 
+              " WHERE tagitus.viesti_id = :viesti_id "
+              " AND tagi.id = tagitus.tagi_id ").params(viesti_id=viesti_id)
+    res = db.engine.execute(stmt)
+    tagit = []
+    for row in res:
+        tagit.append({"id":row[0], "nimi":row[1]})
+     
     viesti = Viesti.query.get(viesti_id)
-    return render_template("viestit/viesti.html", viesti=viesti )   
+ 
+    stmt=text(" SELECT kayttaja.kayttajanimi FROM kayttaja " 
+              " WHERE kayttaja.id = :kayttaja_id " ).params(kayttaja_id=viesti.kayttaja_id)
+    kayttaja=db.engine.execute(stmt).fetchone()
+
+    return render_template("viestit/viesti.html", viesti=viesti, tagit=tagit, kayttaja=kayttaja )   
 
 # uusi viesti-näkymä
 @app.route("/viesti/uusi")
@@ -63,13 +75,7 @@ def viesti_muokkaa_uusi():
 def viesti_uusi():
     form = ViestiForm(request.form)
     form.tagit.query = Tagi.query.all()
-    print('----------------------')
-    print(form.tagit.data)
-    for t in form.tagit.data:
-        print (t.id)
-        stmt=text("INSERT INTO tagitus (tagi_id, viesti_id)" 
-                  "VALUES (:tagi, 2)").params(tagi=t.id)
-        db.engine.execute(stmt)
+    
     if not form.validate():
         return render_template("viestit/uusi.html", form = form, viesti = "Lorem ipsum")
     
@@ -79,12 +85,12 @@ def viesti_uusi():
     db.session().add(viesti)
     db.session().commit()
 
+    # lisätään viestin tagit tagitukseen
 
-    # tagit = form.tagit.data
-    # for tagi in tagit:
-    #     t = Tagitus(int(tagi), viesti.id)
-    #     db.session().add(t)
-    #     db.session().commit()
-
+    for t in form.tagit.data:
+        print (t.id)
+        stmt=text("INSERT INTO tagitus (tagi_id, viesti_id)" 
+                  "VALUES (:tagi, :viesti)").params(tagi=t.id, viesti=viesti.id)
+        db.engine.execute(stmt)
 
     return redirect(url_for("index"))

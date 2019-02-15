@@ -2,11 +2,9 @@
 
 <div class="row">
     <div class="col-12 tagilista">
-        
         <p class="tagilista">
             {% for tagi in tagit %}
-                <a href="/tagi/{{tagi.id}}">{{tagi.nimi}}</a>&nbsp;
-
+                <a href="/tagi/{{tagi.id}}">#{{tagi.nimi}}</a>&nbsp;
             {% endfor %}
         </p>
     </div> 

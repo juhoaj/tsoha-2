@@ -28,7 +28,7 @@ def tagi_uusi():
     tagi = Tagi(form.nimi.data,)
     db.session().add(tagi)
     db.session().commit()
-    
+
     return redirect(url_for("tagi_hallinta"))
 
 
@@ -37,7 +37,7 @@ def tagi_uusi():
 @login_required
 def tagi_muokkaa(tagi_id):
     form = TagiForm(request.form)
-
+    
     t = Tagi.query.get(tagi_id)
     return render_template("tagit/muokkaa.html", tagi=t, form=TagiForm() )   
 

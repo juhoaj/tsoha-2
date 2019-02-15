@@ -4,7 +4,13 @@
 
 {% include 'includes/header.html' %}
 <h1>{{ viesti.otsikko }}</h1>
-<p class="meta small">#placeholder #placeholder  nimimerkki {{ viesti.luotu }}</p>
+<p class="meta small">
+    {% for tagi in tagit %}
+        <a href="/tagi/{{tagi.id}}">#{{tagi.nimi}}</a>&nbsp;
+    {% endfor %}
+    {{ kayttaja.kayttajanimi }} &nbsp;
+    {{ viesti.luotu }}
+</p>
 
 <p class="sisalto"> {{viesti.sisalto}}</p>
 
