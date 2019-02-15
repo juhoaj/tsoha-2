@@ -3,8 +3,12 @@
 {% block body %}
 
 {% include 'includes/header.html' %}
+    <form class="tagi-seuraa" method="POST" action="{{ url_for('tagi_seuraa', tagi_id=tagi.id) }}">
+        <p>{{ tagi.nimi }}</p>
+        <input style="display: none;" type="text" name="seuraa" value="kiinnostelee"/>
+        <input type="submit" value="seuraa"/>
+    </form>
 
-<p>{{ tagi.nimi }}</p>
 {% include 'includes/uusiviesti.html' %}
 {% include 'includes/viestilista.html' %}
 

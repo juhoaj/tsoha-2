@@ -21,9 +21,14 @@
         {% endif %}
 
         <label>Taagit</label>
-        {{ form.taagit(size=30, maxlength=50) }}
+        {{ form.tagit(size=30, maxlength=50) }}
 
         <button type="submit" value="Lisää uusi viesti" class="btn btn-link float-right">Lähetä viesti</button>
     </form>
+    {% if viesti is defined %}
+    <div class="alert alert-primary" role="alert">
+        {{ viesti }}
+    </div>
+    {% endif %}
 
     {% endblock %}

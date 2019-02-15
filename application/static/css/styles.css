@@ -24,6 +24,9 @@ nav {
 .tagilista {
   margin-bottom: 2rem; }
 
+.tagi-seuraa p {
+  display: inline-block; }
+
 .viestirivi {
   border-top: 1px solid #D8D8D8; }
   .viestirivi:hover {

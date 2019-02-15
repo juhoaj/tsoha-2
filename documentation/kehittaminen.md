@@ -18,8 +18,11 @@ Noudattaa materiaalin esimerkkejä.
 
 Kehittämisen loitsut juuresta:
 * pakettien hakeminen repositiosta hakemisen jälkeen `pip install -r requirements.txt`
-* virtuaaliympäristöjen aktivointi `source venv/bin/activate`
+* virtuaaliympäristön luonti `python3 -m venv venv` (vain pakettien hakemisen jälkeen)
+* virtuaaliympäristöjen aktivointi `source venv/bin/activate` (devaamista aloittaessa)
 * käynnistäminen lokaalisti `python run.py`
+
+(Protip: muista deaktivoida mahdolliset virtuaaliympäristöt ennen pip install:ia)
 
 Pääriippuvuudet:
   * Flask - sivujen piirtämiseen

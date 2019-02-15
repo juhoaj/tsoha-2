@@ -5,12 +5,13 @@ class Kayttaja(Base):
 
     __tablename__ = "kayttaja"
 
+    id = db.Column(db.Integer, primary_key=True)
     kayttajanimi = db.Column(db.String(144), nullable=False)
     salasana = db.Column(db.String(144), nullable=False)
     yllapitaja = db.Column(db.Boolean, nullable=False)
 
     viestit = db.relationship("Viesti", backref='kayttaja', lazy=True)
-    # seuratut = db.relationship('Seuratut', backref='seuratut_tagit', lazy=True)
+    viestit = db.relationship("Seuratut", backref="kayttaja")
 
     def __init__(self, nimi, salasana):
         self.kayttajanimi = nimi

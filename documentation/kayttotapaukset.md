@@ -30,6 +30,6 @@
 
 ## Tekniset stoorit todo 
   * Tageissa CRUD (liitostaulun siivous)
-  * Kenttien validointi
+  * Kenttien validointi (mytös ylipitkät syötteet)
   * ylläpidon urleihin myös tarkastus että käyttäjä on ylläpitäjä
   * vain käyttäjä tai ylläpitäjä voi muuttaa käyttäjän oman salasanansa

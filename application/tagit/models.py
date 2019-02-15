@@ -8,19 +8,19 @@ from application.auktorisointi.models import Kayttaja
 class Tagi(Base):
     __tablename__ = 'tagi'
 
+    id = db.Column(db.Integer, primary_key=True)
     nimi = db.Column(db.String(40), nullable=False)
-
-    # tagitus = db.relationship('Tagitus', backref='viestin_tagit', lazy=True)
-    # seuraajat = db.relationship("Kayttaja", backref='kayttajan_tagit', lazy=True)
+    viestit = db.relationship("Tagitus", backref="tagi")
+    seuraajat = db.relationship("Seuratut", backref="tagi")
 
     def __init__(self, nimi):
         self.nimi = nimi
 
 class Tagitus(db.Model):
     __tablename__ = 'tagitus'
-
-    tagi_id = db.Column(db.Integer, db.ForeignKey('tagi.id'), primary_key=True),
-    viesti_id = db.Column(db.Integer, db.ForeignKey('viesti.id'), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    tagi_id = db.Column(db.Integer, db.ForeignKey('tagi.id'), nullable=False)
+    viesti_id = db.Column(db.Integer, db.ForeignKey('viesti.id'), nullable=False)
 
     def __init__(self, tagi_id, viesti_id):
         self.tagi_id = tagi_id
@@ -29,6 +29,11 @@ class Tagitus(db.Model):
 
 class Seuratut(db.Model):
     __tablename__ = 'seuratut'
-
-    tagi_id = db.Column(db.Integer, db.ForeignKey('tagi.id'), primary_key=True),
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    tagi_id = db.Column(db.Integer, db.ForeignKey('tagi.id'), primary_key=True)
     kayttaja_id = db.Column(db.Integer, db.ForeignKey('kayttaja.id'), primary_key=True)
+
+def __init__(self, tagi_id, kayttaja_id):
+    self.tagi_id = tagi_id
+    self.kayttaja_id = kayttaja_id
+
