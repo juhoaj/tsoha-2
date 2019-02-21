@@ -3,6 +3,22 @@
 
 {% include 'includes/header.html' %}
 
-<p>Omat asetukset näkyy</p>
+<div class="tagilista" >
+    <a href="{{ url_for('index') }} ">&lsaquo;Takaisin</a> |&nbsp;  </a>
+    <p>Omat asetukset</p>
+</div>
+<form method="POST" action="{{ url_for('kayttaja_paivita_admin', kayttaja_id=kayttaja.id) }}">
+    <p>
+        {% if current_user.yllapitaja is sameas true %}
+            Olet ylläpitäjä
+        {% else %}
+            Et ole ylläpitäjä
+        {% endif %}
+    </p>
+    <input style="display: none;"type="text" name="name" value="vaihda"/>
+    <input type="submit" value="Vaihda"/>
+</form>
+
+
 
 {% endblock %}

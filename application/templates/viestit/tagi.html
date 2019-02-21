@@ -4,11 +4,8 @@
 
 {% include 'includes/header.html' %}
     <form class="tagilista" method="POST" action="{{ url_for('tagi_seuraa', tagi_id=tagi.id) }}">
-        <p>#{{ tagi.nimi }}</p>
-        {% if current_user.is_authenticated %}
-            <input style="display: none;" type="text" name="seuraa" value="kiinnostelee"/>
-            <input type="submit" value="seuraa" class="btn btn-primary btn-sm"/>
-        {% endif %}
+        <a href="{{ url_for('index') }} ">&lsaquo;Takaisin</a> |&nbsp; 
+        </a><p>#{{ tagi.nimi }}</p>
     </form>
 
 {% include 'includes/uusiviesti.html' %}

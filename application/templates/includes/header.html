@@ -4,8 +4,10 @@
         <div class="col-12 ylanavi">
             {% if current_user.is_authenticated %}
             <p class="small"> Moi {{ current_user.kayttajanimi }} |
-                <a href="{{ url_for('kayttaja') }}">asetukset</a> |
-                <a href="{{ url_for('yllapito') }}">hallinta</a> |
+                <a href="{{ url_for('kayttaja') }}">omat asetukset</a> |
+                {% if current_user.yllapitaja is sameas true %}
+                    <a href="{{ url_for('yllapito') }}">Taagin hallinta</a> |
+                {% endif %}
                 <a href="{{ url_for('kirjaudupois') }}">kirjaudu ulos</a>
             </p>
             {% else %}
@@ -20,27 +22,6 @@
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-
-
-                    <a  class=" nav-link" href="{{ url_for('index') }} " > Kaikki </a>
-   
-                </li>
-                {% if current_user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('omat') }} ">Omat</a>
-                    </li>
-                {% endif %}
-
-                {% if tagi is defined %}
-                <li class="nav-item">
-                        <a class="nav-link" href="#">{{ tagi.nimi }}</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </div>
     </nav>
 
 </header>

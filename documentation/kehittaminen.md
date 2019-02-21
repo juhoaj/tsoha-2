@@ -1,4 +1,3 @@
-
 ### Projektin rakenne
 
 ```
@@ -13,16 +12,25 @@
 ...
 ```
 
-### Backend
-Noudattaa materiaalin esimerkkejä.
+### Asennus paikalliseen ympäristöön:
 
-Kehittämisen loitsut juuresta:
 * pakettien hakeminen repositiosta hakemisen jälkeen `pip install -r requirements.txt`
 * virtuaaliympäristön luonti `python3 -m venv venv` (vain pakettien hakemisen jälkeen)
-* virtuaaliympäristöjen aktivointi `source venv/bin/activate` (devaamista aloittaessa)
+* virtuaaliympäristöjen aktivointi `source venv/bin/activate`
 * käynnistäminen lokaalisti `python run.py`
 
-(Protip: muista deaktivoida mahdolliset virtuaaliympäristöt ennen pip install:ia)
+(Protip: muista deaktivoida muut mahdolliset virtuaaliympäristöt ennen pip install:ia)
+
+### Asennus Herokuun:
+
+* Asenna Heroku CLI ellet ole jo sitä asentanut https://devcenter.heroku.com/articles/heroku-cli
+* Kirjaudu Herokuun `heroku login -i`
+* `heroku create` luo projektin Herokuun ja kertoo sovelluksen nimen
+* Loitsi `git remote -v` ja tarkista että Git remote "heroku" on luotu, jos ei luo manuaalisersti
+* Siirtääksesi projektin Herokuun julkaistavaksi loitsi `heroku git:remote -a <saamasi sovellusnimi>`
+
+
+
 
 Pääriippuvuudet:
   * Flask - sivujen piirtämiseen

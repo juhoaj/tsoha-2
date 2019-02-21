@@ -1,6 +1,6 @@
 from flask import redirect, render_template, request, url_for
 # from application.viestit.models import Viesti
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 
 from application import app, db, views
 from application.auktorisointi.models import Kayttaja
@@ -18,7 +18,7 @@ def kirjaudu():
     user = Kayttaja.query.filter_by(kayttajanimi=form.kayttajanimi.data, salasana=form.salasana.data).first()
     if not user:
         return render_template("auktorisointi/kirjaudu.html", form = form,
-                               viesti = "No such username or password")
+                               sanoma = "Käyttäjää tai salasanaa ei löydy")
     login_user(user)
     return redirect(url_for("index"))   
 
@@ -27,49 +27,66 @@ def kirjaudupois():
     logout_user()
     return redirect(url_for("index"))    
 
-
 # uusi käyttäjä
 @app.route("/luo_tili", methods=["GET"])
 def kayttaja_muokkaa_uusi():
+    if current_user.is_authenticated:
+        return redirect(url_for("index"))
+
     return render_template("auktorisointi/kayttaja_muokkaa_uusi.html", form=SignupForm())
 
 # luo uusi käyttäjä
 @app.route("/luo_tili", methods=["POST"])
 def kayttaja_uusi():
-    form = LoginForm(request.form)
+    if current_user.is_authenticated:
+        return redirect(url_for("index"))
 
-    # lisää vahvistus jotta salasana täsmää
-
+    form = SignupForm(request.form)
+    print(form.salasana.data)
+    print(form.toistettuSalasana.data)
+    if form.salasana.data != form.toistettuSalasana.data:
+        return render_template("auktorisointi/kayttaja_muokkaa_uusi.html", form = form,
+                               sanoma = "Salasanat eivät täsmää")
     t = Kayttaja(form.kayttajanimi.data, form.salasana.data)
     db.session().add(t)
     db.session().commit()
     return redirect(url_for("kirjaudu"))
 
-# asetukset
+# omat asetukset
 @app.route("/asetukset", methods=["GET"])
 @login_required
 def kayttaja():
-    t = Kayttaja.query.get(1)
-    return render_template("auktorisointi/kayttaja.html", kayttaja = t)
+    return render_template("auktorisointi/kayttaja.html", kayttaja = current_user)
 
+# ylläpitäjuuden paivitys
+@app.route("/asetukset/<kayttaja_id>/admin", methods=["POST"])
+@login_required
+def kayttaja_paivita_admin(kayttaja_id):
+    # if kayttaja_id != current_user.id:
+    #    return redirect(url_for("index"))
+    if current_user.yllapitaja==True:
+        current_user.yllapitaja=False
+    else:
+        current_user.yllapitaja=True  
+    db.session().commit()
+    return redirect(url_for("kayttaja"))
 
 # salasanan muokkaus
-@app.route("/asetukset/<kayttaja_id>/paivita", methods=["GET"])
+@app.route("/asetukset/<kayttaja_id>/paivita_salasana", methods=["GET"])
 @login_required
-def kayttaja_muokkaa(kayttaja_id):
+def kayttaja_muokkaa_salasana(kayttaja_id):
     # form = LoginForm(request.form)
     # t = Kayttaja.query.get(kayttaja_id)
     # db.session().commit()
     return render_template("auktorisointi/kayttaja_muokkaa.html", form=LoginForm() )   
 
 # salasanan päivitys
-@app.route("/asetukset/<kayttaja_id>", methods=["POST"])
+@app.route("/asetukset/<kayttaja_id>/salasana", methods=["POST"])
 @login_required
-def kayttaja_paivita(kayttaja_id):
+def kayttaja_paivita_salasana(kayttaja_id):
     t = Kayttaja.query.get(kayttaja_id)
     t.salasana = request.form.get("salasana")
     db.session().commit()
-
     return redirect(url_for("asetukset"))
 
 # ylläpito

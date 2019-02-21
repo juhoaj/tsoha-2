@@ -1,7 +1,7 @@
 from application import app, db, views
 from flask import redirect, render_template, request, url_for
 from flask_login import login_required, current_user
-from sqlalchemy.sql import text
+from sqlalchemy.sql import text, func, exists
 
 from application.viestit.models import Viesti
 from application.tagit.models import Tagi, Tagitus, Seuratut
@@ -16,6 +16,15 @@ def index():
 def tagi(tagi_id):
     t = Tagi.query.get(tagi_id)
 
+    print("-----------------")
+
+    # filtteröitävä tagi_id:llä ja current userilla, eka if että on kirjautunut
+    seurattu = Tagitus.query.filter_by(tagi_id=5).count()
+    if seurattu > 0:
+        arvo='seuraa'
+    else:
+        arvo='poista'
+
     stmt=text(" SELECT viesti.id, viesti.otsikko FROM tagitus, viesti " 
               " WHERE tagitus.tagi_id = :tagi_id "
               " AND viesti.id = tagitus.viesti_id ").params(tagi_id=tagi_id)
@@ -23,22 +32,21 @@ def tagi(tagi_id):
     viestit = []
     for row in res:
         viestit.append({"id":row[0], "otsikko":row[1]})
-    return render_template("viestit/tagi.html", tagi=t, viestit=viestit)
+    return render_template("viestit/tagi.html", tagi=t, viestit=viestit, arvo=arvo)
 
 # ottaa vastaan tagin seuraamisen ja muuttaa sen tilaa
 @app.route("/tagi/<int:tagi_id>", methods=["POST"])
 # login_required
 def tagi_seuraa(tagi_id):
-    print("-----------------")
+    
     t = request.form.get("seuraa")
-    print(current_user.id)
+  
     if t == 'kiinnostelee':
         stmt=text("INSERT INTO seuratut (tagi_id, kayttaja_id)" 
                   "VALUES (:tagi, :kayttaja)").params(tagi=tagi_id, kayttaja=1)
         db.engine.execute(stmt)
-    # db.session().add(t)
-    # db.session().commit()
-    return redirect(url_for("tagi", tagi_id=tagi_id))
+
+    return redirect(url_for("tagi", tagi_id=tagi_id, nappiteksti=nappiteksti))
 
 
 # viestien näyttäminen omista tageista

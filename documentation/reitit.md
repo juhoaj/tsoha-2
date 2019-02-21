@@ -22,12 +22,6 @@ Huom! html-templatet ovat pakkauksiensa nimisissä kansioissa nimettynä funktio
   * POST /tagi_hallinta/# `X` päivittää tagin # `tagi_paivita`
   * POST /tagi_hallinta/#/poista `X` poistaa tagin # jos poista-kentän value="poistele" `tagi_poista`
 
-
-`vastaukset` -pakkaus näyttää viestin ja sen vastaukset, hallinnoi vastauksia 
-  * POST /viesti/# `X` lähettää uuden vastauksen viestiin jonka id on #
-  * GET /viesti/#/#/lukijat `X` näyttää viestin # vastauksen # lukijat
- 
-
 `auktorisointi` -pakkaus käyttäjänhallintaan ja kirjautumiseen
   * GET /kirjaudu näyttää kirjautumisnäkymän ja ottaa vastaan kirjautumisen `kirjaudu`
   * GET /luo_tili syötä uusi käyttäjä `kayttaja_muokkaa_uusi`
