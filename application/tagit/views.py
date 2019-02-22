@@ -24,8 +24,12 @@ def tagi_uusi():
     form = TagiForm(request.form)
 
     if not form.validate():
-        return render_template("tagit/uusi.html", form = form)
-    
+        return render_template("tagit/uusi.html", 
+            form = form, 
+            sanoma = "Taagin pitää olla vähintään neljä ja enintään kymmenen merkkiä pitkä"
+        )
+
+
     tagi = Tagi(form.nimi.data,)
     db.session().add(tagi)
     db.session().commit()

@@ -59,7 +59,7 @@ def tagi(tagi_id):
     total=len(viestit)
     pagination_viestit = get_viestit(offset=offset, per_page=per_page)
     pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
-    return render_template("viestit/index.html",
+    return render_template("viestit/tagi.html",
         viestit=pagination_viestit,
         page=page,
         tagi=t,
@@ -148,7 +148,7 @@ def viesti_uusi():
     if not form.validate():
         return render_template("viestit/uusiViesti.html", 
             form = form, 
-            sanoma = "Lorem ipsum"
+            sanoma = "Otsikon pitää olla vähintään neljä ja enintään kolmekymmentä sekä viestin vähintään neljä ja enintään tuhat merkkiä pitkä"
         )
     
     viesti = Viesti(form.otsikko.data, form.sisalto.data, None)
@@ -188,7 +188,7 @@ def vastaus_uusi(viesti_id):
     if not form.validate():
         return render_template("viestit/uusiVastaus.html", 
             form = form, 
-            sanoma = "Lorem ipsum", 
+            sanoma = "Vastauksen pitää olla vähintään neljä ja enintään tuhat merkkiä pitkä", 
             viesti = viesti
         )
      

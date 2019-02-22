@@ -10,5 +10,11 @@
     {{ form.nimi }}
     <input type="submit" value="Lisää"/>
 </form>
+{% if sanoma is defined %}
+    <div class="alert alert-primary" role="alert">
+        {{ sanoma }}
+    </div>
+{% endif %}
+
 
 {% endblock %}

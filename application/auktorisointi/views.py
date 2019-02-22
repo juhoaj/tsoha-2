@@ -10,11 +10,12 @@ from application.auktorisointi.forms import LoginForm, SignupForm, ChangePasswor
 @app.route("/kirjaudu", methods=["GET", "POST"])
 def kirjaudu():
     if request.method == "GET":
+        if current_user.is_authenticated:
+            return redirect(url_for("index"))
         return render_template("auktorisointi/kirjaudu.html", form = LoginForm())
 
     form = LoginForm(request.form)
-    # mahdolliset validoinnit
-
+    
     user = Kayttaja.query.filter_by(kayttajanimi=form.kayttajanimi.data).first()
     if not user:
         return render_template("auktorisointi/kirjaudu.html", form = form,
@@ -42,11 +43,26 @@ def kayttaja_uusi():
         return redirect(url_for("index"))
 
     form = SignupForm(request.form)
-    print(form.salasana.data)
-    print(form.toistettuSalasana.data)
+    
+    if Kayttaja.query.filter_by(kayttajanimi = form.kayttajanimi.data).count() > 0:
+        return render_template("auktorisointi/kirjaudu.html", 
+            form = form,
+            sanoma = "Käyttäjänimi on varattu"
+        )
+
+
     if form.salasana.data != form.toistettuSalasana.data:
-        return render_template("auktorisointi/kayttaja_muokkaa_uusi.html", form = form,
-                               sanoma = "Salasanat eivät täsmää")
+        return render_template("auktorisointi/kirjaudu.html", 
+            form = form,
+            sanoma = "Käyttäjänimi on varattu"
+        )
+
+    if not form.validate():
+        return render_template("auktorisointi/kirjaudu.html", 
+            form = form, 
+            sanoma = "Käyttäjänimen ja salasanan pitää olla vähintään neljä ja enintään kaksikymmentä merkkiä pitkä"
+        )
+    
     t = Kayttaja(form.kayttajanimi.data, form.salasana.data)
     db.session().add(t)
     db.session().commit()

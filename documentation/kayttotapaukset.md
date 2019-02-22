@@ -1,6 +1,3 @@
-## todo
-  * Käyttäjä nakee viestilistauksessa vastauksien lukumäärän
-
 ## Käyttäjätapaukset tehty
   * Käyttäjä näkee tietokannasta tietoa sivulla
   * Käyttäjä voi luoda palveluun tunnukset
@@ -15,9 +12,11 @@
   * Käyttäjä voi lisätä vastauksen viestiin
   * (Vain) ylläpitäjä näkee ylläpitäjän näkymässä käyttäjät
   * Ylläpitäjä voi poistaa käyttäjän (paitsi itsensä)
+    `lorem`
   * (Vain) ylläpitäjä voi lisätä, poistaa ja muokata (nimi) tageja ylläpitonäkymässä
 
 ## Käyttäjätapaukset, jatkokehitys
+  * Käyttäjä nakee viestilistauksessa vastauksien lukumäärän
   * Käyttäjä voi valita tageja seurattavaksi
   * Käyttäjä näkee seuraamiinsa tageihin liitetyt viestit viestilistauksena
   * Viestilistausta voi rajata ajan perusteella
@@ -28,7 +27,6 @@
 ## Tekniset stoorit todo 
   * Kenttien validointi (myös ylipitkät syötteet)
   * Mahdolliset virhetilanteet tuottavat ymmärrettäviä virheviestejä. 
-  * Taaginäkymässä ei näy back
 
   * Käyttötapausten yhteydessä kuvattuna toimivat ja järkevät SQL-kyselyt
   * dokumentaatiossa CREATE TABLE -lauseet sekä indeksien lisäykset
