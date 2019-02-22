@@ -113,7 +113,7 @@ def yllapito():
 @app.route("/hallinta/kayttajat", methods=["GET"])
 @login_required
 def kayttaja_hallinta():
-    kayttajat = Kayttaja.query.all()
+    kayttajat = Kayttaja.query.filter(Kayttaja.id != 1)
     return render_template("auktorisointi/kayttaja_hallinta.html", kayttajat = kayttajat)
 
 # käyttäjän poisto

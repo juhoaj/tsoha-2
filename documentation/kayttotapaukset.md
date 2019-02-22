@@ -27,13 +27,15 @@
   * Käyttäjä näkee seuraamiinsa tageihin liitetyt viestit viestilistauksena
 
 ## Tekniset stoorit todo 
-  * käyttäjä 1, poistettu
+  * isoksi kasvavissa listauksissa sivutus
+  * ylläpidon urleihin myös tarkastus että käyttäjä on ylläpitäjä
+  * käyttäjä 1, "poistettu" luodaan kantaan
   * Lisää luontilause parille tagille
   * Kenttien validointi (myös ylipitkät syötteet)
-  * ylläpidon urleihin myös tarkastus että käyttäjä on ylläpitäjä
+  * Mahdolliset virhetilanteet tuottavat ymmärrettäviä virheviestejä. 
+  * lisätään back nappi viestiin
+
   * Käyttötapausten yhteydessä kuvattuna toimivat ja järkevät SQL-kyselyt
   * dokumentaatiossa CREATE TABLE -lauseet sekä indeksien lisäykset
-  * isoksi kasvavissa listauksissa sivutus
   * SQL-virheiden käsittely
-  * Mahdolliset virhetilanteet tuottavat ymmärrettäviä virheviestejä. 
   * ei pois-kommentoitua koodia 
