@@ -32,3 +32,10 @@ class Kayttaja(Base):
 
     def is_adminstrator(self):
         return self.yllapitaja
+
+    def roles(self):
+        print('-----------')
+        if self.yllapitaja == True:
+            return ["ADMIN"]
+        else:
+            return ["USER"]

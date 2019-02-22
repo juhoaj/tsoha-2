@@ -1,22 +1,43 @@
 from application import app, db, views
-from flask import redirect, render_template, request, url_for
+from flask import redirect, render_template, request, url_for, Blueprint
 from flask_login import login_required, current_user
 from sqlalchemy.sql import text, func, exists
+from flask_paginate import Pagination, get_page_parameter, get_page_args
 
 from application.viestit.models import Viesti
 from application.tagit.models import Tagi, Tagitus, Seuratut
 from application.viestit.forms import ViestiForm, VastausForm
 
+# aloitussivu, ensimmäinen sivutettu sivu viesteistä
 @app.route("/")
 def index():
-    return render_template("viestit/index.html", viestit = Viesti.query.filter_by(vastaus_idlle = "null"), tagit=Tagi.query.all())
+    viestit = Viesti.query.filter_by(vastaus_idlle = "null")
+
+    def get_viestit(offset=0, per_page=10):
+        return viestit[offset: offset + per_page]
+
+    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page')
+    total=viestit.count()
+    pagination_viestit = get_viestit(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
+    return render_template("viestit/index.html",
+        viestit=pagination_viestit,
+        page=page,
+        per_page=per_page,
+        pagination=pagination,
+    )
+
+
+
+    
+    # pagination = Pagination(page_parameter='sivu', page=page, total=viestit.count(), search=search, record_name='viestit')
+
+    return render_template("viestit/index.html", viestit = viestit, tagit=Tagi.query.all(), pagination=pagination)
 
 # näyttää viestit tagista #
 @app.route("/tagi/<tagi_id>")
 def tagi(tagi_id):
     t = Tagi.query.get(tagi_id)
-
-    print("-----------------")
 
     # filtteröitävä tagi_id:llä ja current userilla, eka if että on kirjautunut
     seurattu = Tagitus.query.filter_by(tagi_id=5).count()

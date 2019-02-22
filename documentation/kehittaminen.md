@@ -29,6 +29,7 @@
 * Loitsi `git remote -v` ja tarkista että Git remote "heroku" on luotu, jos ei luo manuaalisersti
 * Siirtääksesi projektin Herokuun julkaistavaksi loitsi `heroku git:remote -a <saamasi sovellusnimi>`
 
+(Protip: jos lisäät pip:llä paketteja muista päivittää requirements.txt loitsula `pip freeze | grep -v pkg-resources > requirements.txt`)
 
 
 

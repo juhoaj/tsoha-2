@@ -1,6 +1,5 @@
 {% block body %}
 {% for viesti in viestit %}
-
 <a href="{{ url_for('viesti', viesti_id=viesti.id) }}">
     <div class="viestirivi">
         <p class="large">{{ viesti.otsikko }} </p>
@@ -8,4 +7,7 @@
 </a>    
 
 {% endfor %}
+
+{{ pagination.links }}
+
 {% endblock %}

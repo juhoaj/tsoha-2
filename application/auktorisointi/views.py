@@ -1,8 +1,8 @@
 from flask import redirect, render_template, request, url_for
-from flask_login import login_user, logout_user, login_required, current_user
+from flask_login import login_user, logout_user, current_user
 from sqlalchemy.sql import text, func, exists
 
-from application import app, db, views
+from application import app, db, views, login_required
 from application.auktorisointi.models import Kayttaja
 from application.auktorisointi.forms import LoginForm, SignupForm, ChangePasswordForm
 
@@ -54,13 +54,13 @@ def kayttaja_uusi():
 
 # omat asetukset
 @app.route("/asetukset", methods=["GET"])
-@login_required
+@login_required(role="ANY")
 def kayttaja():
     return render_template("auktorisointi/kayttaja.html", kayttaja = current_user)
 
 # ylläpitäjuuden paivitys
 @app.route("/asetukset/<kayttaja_id>/admin", methods=["POST"])
-@login_required
+@login_required(role="ANY")
 def kayttaja_paivita_admin(kayttaja_id):
     if request.form.get("admin") != "vaihda":
         return redirect(url_for("kayttaja"))
@@ -73,7 +73,7 @@ def kayttaja_paivita_admin(kayttaja_id):
 
 # salasanan muokkaus
 @app.route("/asetukset/<kayttaja_id>/paivita_salasana", methods=["GET"])
-@login_required
+@login_required(role="ANY")
 def kayttaja_muokkaa_salasana(kayttaja_id):
     # form = LoginForm(request.form)
     # t = Kayttaja.query.get(kayttaja_id)
@@ -82,7 +82,7 @@ def kayttaja_muokkaa_salasana(kayttaja_id):
 
 # salasanan päivitys
 @app.route("/asetukset/<kayttaja_id>/salasana", methods=["POST"])
-@login_required
+@login_required(role="ANY")
 def kayttaja_paivita_salasana(kayttaja_id):
     form = ChangePasswordForm(request.form)
     if int(kayttaja_id) != current_user.id:
@@ -104,21 +104,23 @@ def kayttaja_paivita_salasana(kayttaja_id):
 
 # ylläpito
 @app.route("/hallinta", methods=["GET"])
-@login_required
+@login_required(role="ANY")
 def yllapito():
     t = Kayttaja.query.get(1)
     return render_template("auktorisointi/yllapito.html", kayttaja = t)
 
 # käyttäjien listaus
 @app.route("/hallinta/kayttajat", methods=["GET"])
-@login_required
+@login_required(role="ANY")
 def kayttaja_hallinta():
+    print('===============')
+    print(current_user.yllapitaja)
     kayttajat = Kayttaja.query.filter(Kayttaja.id != 1)
     return render_template("auktorisointi/kayttaja_hallinta.html", kayttajat = kayttajat)
 
 # käyttäjän poisto
 @app.route("/asetukset/<kayttaja_id>/poista", methods=["POST"])
-@login_required
+@login_required(role="ANY")
 def kayttaja_poista(kayttaja_id):
     #tarkistetaan ettei poisteta itseä
     if int(kayttaja_id) == current_user.id:
@@ -127,8 +129,7 @@ def kayttaja_poista(kayttaja_id):
         return render_template("auktorisointi/kayttaja_hallinta.html", sanoma=sanoma, kayttajat = kayttajat)
     t = request.form.get("poista")
     if t == 'poistele':
-        print('poistele--------------------')
-    #poista käyttäjä
+        #poista käyttäjä
         stmt=text(" DELETE FROM kayttaja WHERE id = :id").params(id=kayttaja_id)
         db.engine.execute(stmt)
         
