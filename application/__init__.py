@@ -75,8 +75,20 @@ from application.auktorisointi import views
 def load_user(user_id):
    return Kayttaja.query.get(user_id)
 
-
+# luodaan kanta ellei sitä ole jo luotu
 try: 
     db.create_all()
 except:
     pass
+
+# jos kannassa ei ole käyttäjää 1 lisätään se ja pari tagia
+from application.tagit.models import Tagi
+if Kayttaja.query.count() == 0:
+    k = Kayttaja('<poistettu>', '<poistettu>')
+    t1 = Tagi('Käpistely')
+    t2 = Tagi('Yleistä')
+  
+    db.session().add(t1)
+    db.session().add(t2)
+    db.session().add(k)
+    db.session().commit()

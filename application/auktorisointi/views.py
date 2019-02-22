@@ -104,17 +104,15 @@ def kayttaja_paivita_salasana(kayttaja_id):
 
 # ylläpito
 @app.route("/hallinta", methods=["GET"])
-@login_required(role="ANY")
+@login_required(role="ADMIN")
 def yllapito():
     t = Kayttaja.query.get(1)
     return render_template("auktorisointi/yllapito.html", kayttaja = t)
 
 # käyttäjien listaus
 @app.route("/hallinta/kayttajat", methods=["GET"])
-@login_required(role="ANY")
+@login_required(role="ADMIN")
 def kayttaja_hallinta():
-    print('===============')
-    print(current_user.yllapitaja)
     kayttajat = Kayttaja.query.filter(Kayttaja.id != 1)
     return render_template("auktorisointi/kayttaja_hallinta.html", kayttajat = kayttajat)
 
