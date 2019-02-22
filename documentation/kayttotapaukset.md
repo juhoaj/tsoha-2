@@ -1,21 +1,57 @@
 ## Käyttäjätapaukset tehty
-  * Käyttäjä näkee tietokannasta tietoa sivulla
   * Käyttäjä voi luoda palveluun tunnukset
+    `INSERT INTO kayttaja (luotu, kayttajanimi, salasana, yllapitaja) VALUES (CURRENT_TIMESTAMP, "kayttajanimi", "salasana", FALSE);`
+
   * Käyttäjä voi kirjautua palveluun / palvelusta pois
   * Käyttäjä näkee aloitusnäkymässä viestilistauksen (kaikkien viestien otsikoista)
+    `SELECT * FROM viesti WHERE vastaus_idlle IS NULL;`
+
   * Käyttäjä voi tarkastella tagiin liitettyjä viestejä viestilistauksessa
-  * Käyttäjä voi luoda uuden viestin
+    `SELECT viesti.id, viesti.otsikko FROM tagitus, viesti WHERE tagitus.tagi_id = :tagi_id AND viesti.id = tagitus.viesti_id`
+
+  * Kirjautunut käyttäjä voi luoda uuden viestin
+    `INSERT INTO viesti (luotu, otsikko, viesti, kayttaja_id) VALUES (CURRENT_TIMESTAMP, "otsikko", "viesti", :kayttaja_id)`
+
+  * Kirjautunut käyttäjä voi viestiä kirjoittaessa liittää siihen tageja
+    `INSERT INTO tagitus (tagi_id, viesti_id) VALUES (:tagi_id, :viesti_id)` jokaiselle tagille.
+
+  * Käyttäjä voi lukea viestin
+    `SELECT * FROM viesti, kayttaja WHERE viesti.kayttaja_id = kayttaja.id AND viesti.id = :id`
+
+  * KÄyttäjä näkee viestiä lukiessaan sen vastaukset
+    `SELECT * FROM viesti, kayttaja WHERE viesti.kayttaja_id = kayttaja.id AND viesti.vastaus_idlle = :id`
+
   * Käyttäjä voi vaihtaa salasanansa
+    `UPDATE kayttaja SET salasana = "uusi_salasana" WHERE id=:kayttaja_id;`
+
   * Käyttäjä voi muuttaa itsensä ylläpitäjäksi (jotta toteutus katselmoitavissa helpommin)
+    `UPDATE kayttaja SET yllapitaja = TRUE WHERE id=:kayttaja_id;` || `UPDATE kayttaja SET yllapitaja = FALSE WHERE id=:kayttaja_id;` 
+
   * Viestilistauksen viestiä (otsikko) klikkaamalla näkee viestiketjun (koko viestin ja sen mahdolliset vastaukset)
-  * Uuteen viestiin voi viestiä kirjoittaessa lisätä tageja
+    `SELECT * FROM viesti WHERE vastaus_idlle = :viesti_id;`
+
   * Käyttäjä voi lisätä vastauksen viestiin
+    `INSERT INTO kayttaja (luotu, kayttajanimi, salasana, yllapitaja) VALUES (CURRENT_TIMESTAMP, "kayttajanimi", "salasana", FALSE);`
+
   * (Vain) ylläpitäjä näkee ylläpitäjän näkymässä käyttäjät
+    `SELECT * FROM kayttaja WHERE NOT id=1`
+
   * Ylläpitäjä voi poistaa käyttäjän (paitsi itsensä)
-    `lorem`
-  * (Vain) ylläpitäjä voi lisätä, poistaa ja muokata (nimi) tageja ylläpitonäkymässä
+    `DELETE FROM kayttaja WHERE id = :kayttaja_id`
+
+  * (Vain) ylläpitäjä voi lisätä tagin
+    `INSERT INTO tagi (luotu, nimi) VALUES (CURRENT_TIMESTAMP, "tagi_nimi");`
+
+  * (Vain) ylläpitäjä voi muokata tagin nimeä 
+    `UPDATE tagi SET nimi = "uusi_nimi" WHERE id=:tagi_id;`
+
+  * (Vain) ylläpitäjä voi poistaa tagin
+    `DELETE FROM tagitus WHERE tagi_id = :tagi_id` sekä 
+    `DELETE FROM tagi WHERE id = :tagi_id`
 
 ## Käyttäjätapaukset, jatkokehitys
+  * Käyttäjä kirjautuu automaattisesti sisään tilin luomisen jälkeen
+  * Käyttäjä näkee viestinäkymässä takaisin -napin joka vie edelliselle sivulle (etusivu tai jokin tagi-sivu)
   * Käyttäjä nakee viestilistauksessa vastauksien lukumäärän
   * Käyttäjä voi valita tageja seurattavaksi
   * Käyttäjä näkee seuraamiinsa tageihin liitetyt viestit viestilistauksena
@@ -23,17 +59,3 @@
   * Käyttäjän lukemista viesteistä ja vastauksista pidetään kirjaa
   * Lukemattomat viestit (ja vastaukset) korostetaan käyttäjälle  
   * Käyttäjä näkee viestiketjussa ketkä ovat nähneet viestin (ei ketkä lukeneet vastaukset)
-
-## Tekniset stoorit todo 
-  * Kenttien validointi (myös ylipitkät syötteet)
-  * Mahdolliset virhetilanteet tuottavat ymmärrettäviä virheviestejä. 
-
-  * Käyttötapausten yhteydessä kuvattuna toimivat ja järkevät SQL-kyselyt
-  * dokumentaatiossa CREATE TABLE -lauseet sekä indeksien lisäykset
-  * SQL-virheiden käsittely
-  * ei pois-kommentoitua koodia 
-  * nätimpi date
-  * suoraan tilin luomisesta kirjautuminen
-
-
-  * lisätään back nappi viestiin

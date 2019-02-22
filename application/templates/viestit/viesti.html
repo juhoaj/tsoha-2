@@ -10,7 +10,7 @@
     {% endfor %}
     <br>
     @{{ kayttaja.kayttajanimi }} 
-    | {{ viesti.luotu }}
+    | {{ viesti.luotu('%Y-%m-%d') }}
 </p>
 
 <p class="sisalto"> {{viesti.sisalto}}</p>
@@ -20,7 +20,7 @@
 {% for vastaus in vastaukset %}
     <p class="meta small">
         @{{ vastaus.kayttajanimi }} 
-        | {{ vastaus.luotu }}
+        | {{ vastaus.luotu('%Y-%m-%d') }}
     </p>
     <p class="sisalto"> {{vastaus.sisalto}}</p>
     <hr>
