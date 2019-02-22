@@ -13,9 +13,11 @@ from application.viestit.forms import ViestiForm, VastausForm
 def index():
     viestit = Viesti.query.filter_by(vastaus_idlle = "null")
 
+    # muokataan viestit paginaatiota varten
     def get_viestit(offset=0, per_page=10):
         return viestit[offset: offset + per_page]
 
+    # viritellään paginaatio
     page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page')
     total=viestit.count()
     pagination_viestit = get_viestit(offset=offset, per_page=per_page)
@@ -23,23 +25,17 @@ def index():
     return render_template("viestit/index.html",
         viestit=pagination_viestit,
         page=page,
+        tagit=Tagi.query.all(),
         per_page=per_page,
         pagination=pagination,
     )
-
-
-
-    
-    # pagination = Pagination(page_parameter='sivu', page=page, total=viestit.count(), search=search, record_name='viestit')
-
-    return render_template("viestit/index.html", viestit = viestit, tagit=Tagi.query.all(), pagination=pagination)
 
 # näyttää viestit tagista #
 @app.route("/tagi/<tagi_id>")
 def tagi(tagi_id):
     t = Tagi.query.get(tagi_id)
 
-    # filtteröitävä tagi_id:llä ja current userilla, eka if että on kirjautunut
+    # haetaan viestit tagi_id:llä
     seurattu = Tagitus.query.filter_by(tagi_id=5).count()
     if seurattu > 0:
         arvo='seuraa'
@@ -53,7 +49,24 @@ def tagi(tagi_id):
     viestit = []
     for row in res:
         viestit.append({"id":row[0], "otsikko":row[1]})
-    return render_template("viestit/tagi.html", tagi=t, viestit=viestit, arvo=arvo)
+
+    # muokataan viestit paginaatiota varten
+    def get_viestit(offset=0, per_page=10):
+        return viestit[offset: offset + per_page]
+
+    # viritellään paginaatio
+    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page')
+    total=len(viestit)
+    pagination_viestit = get_viestit(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
+    return render_template("viestit/index.html",
+        viestit=pagination_viestit,
+        page=page,
+        tagi=t,
+        per_page=per_page,
+        pagination=pagination,
+    )
+
 
 # ottaa vastaan tagin seuraamisen ja muuttaa sen tilaa
 @app.route("/tagi/<int:tagi_id>", methods=["POST"])
@@ -67,7 +80,10 @@ def tagi_seuraa(tagi_id):
                   "VALUES (:tagi, :kayttaja)").params(tagi=tagi_id, kayttaja=1)
         db.engine.execute(stmt)
 
-    return redirect(url_for("tagi", tagi_id=tagi_id, nappiteksti=nappiteksti))
+    return redirect(url_for("tagi", 
+        tagi_id=tagi_id, 
+        nappiteksti='testailumielessa')
+    )
 
 
 # viestien näyttäminen omista tageista
@@ -105,7 +121,12 @@ def viesti(viesti_id):
     for row in res2:
         vastaukset.append({"luotu":row[0], "id":row[1], "sisalto":row[3], "kayttajanimi":row[8]})
 
-    return render_template("viestit/viesti.html", viesti=viesti, tagit=tagit, kayttaja=kayttaja, vastaukset=vastaukset )   
+    return render_template("viestit/viesti.html", 
+        viesti=viesti, 
+        tagit=tagit, 
+        kayttaja=kayttaja, 
+        vastaukset=vastaukset 
+    )   
 
 # uusi viesti-näkymä
 @app.route("/viesti/uusi")
@@ -125,7 +146,10 @@ def viesti_uusi():
     form.tagit.query = Tagi.query.all()
     
     if not form.validate():
-        return render_template("viestit/uusiViesti.html", form = form, sanoma = "Lorem ipsum")
+        return render_template("viestit/uusiViesti.html", 
+            form = form, 
+            sanoma = "Lorem ipsum"
+        )
     
     viesti = Viesti(form.otsikko.data, form.sisalto.data, "null")
     viesti.kayttaja_id = current_user.id
@@ -149,7 +173,10 @@ def viesti_uusi():
 def vastaus_muokkaa_uusi(viesti_id):
     form = VastausForm()
     viesti = Viesti.query.get(viesti_id)
-    return render_template("viestit/uusiVastaus.html", form=form, viesti=viesti)
+    return render_template("viestit/uusiVastaus.html", 
+        form=form, 
+        viesti=viesti
+    )
 
 # uusi vastaus-vastaanotto
 @app.route("/viesti/<viesti_id>", methods=["POST"])
@@ -159,7 +186,11 @@ def vastaus_uusi(viesti_id):
     viesti = Viesti.query.get(viesti_id)
     
     if not form.validate():
-        return render_template("viestit/uusiVastaus.html", form = form, sanoma = "Lorem ipsum", viesti = viesti)
+        return render_template("viestit/uusiVastaus.html", 
+            form = form, 
+            sanoma = "Lorem ipsum", 
+            viesti = viesti
+        )
      
     vastaus = Viesti("null", form.sisalto.data, int(viesti_id))
     vastaus.kayttaja_id = current_user.id

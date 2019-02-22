@@ -3,7 +3,6 @@
   * Ylläpitäjä voi poistaa käyttäjän
   * (Vain) ylläpitäjä voi lisätä, poistaa ja muokata (nimi) tageja ylläpitonäkymässä
   
-
 ## Käyttäjätapaukset tehty
   * Käyttäjä näkee tietokannasta tietoa sivulla
   * Käyttäjä voi luoda palveluun tunnukset
@@ -27,7 +26,6 @@
   * Käyttäjä näkee seuraamiinsa tageihin liitetyt viestit viestilistauksena
 
 ## Tekniset stoorit todo 
-  * isoksi kasvavissa listauksissa sivutus
   * ylläpidon urleihin myös tarkastus että käyttäjä on ylläpitäjä
   * käyttäjä 1, "poistettu" luodaan kantaan
   * Lisää luontilause parille tagille
