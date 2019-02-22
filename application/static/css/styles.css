@@ -41,5 +41,11 @@ nav {
     padding-right: 0.75rem;
     margin: 0; }
 
+#tagit {
+  list-style-type: none;
+  padding-left: 0.25em; }
+  #tagit label {
+    padding-left: 1px; }
+
 .hallinnan_rivi form {
   display: inline-block; }

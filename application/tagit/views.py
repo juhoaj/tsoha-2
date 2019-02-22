@@ -29,7 +29,6 @@ def tagi_uusi():
             sanoma = "Taagin pitää olla vähintään neljä ja enintään kymmenen merkkiä pitkä"
         )
 
-
     tagi = Tagi(form.nimi.data,)
     db.session().add(tagi)
     db.session().commit()

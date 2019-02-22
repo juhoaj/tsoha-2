@@ -115,7 +115,7 @@ def viesti(viesti_id):
     # haetaan vastaukset ja liitetään niihin käyttäjät
     stmt=text(" SELECT * FROM viesti, kayttaja  " 
               " WHERE viesti.kayttaja_id = kayttaja.id " 
-              " AND viesti.vastaus_idlle = :id ").params(id=viesti.id)
+              " AND viesti.vastaus_idlle = :id").params(id=viesti.id)
     res2 = db.engine.execute(stmt)
     vastaukset = []
     for row in res2:

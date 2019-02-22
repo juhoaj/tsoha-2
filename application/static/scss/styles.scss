@@ -72,6 +72,16 @@ nav {
    
 }
 
+// --- viestin kirjoitus
+
+#tagit {
+    list-style-type: none;
+    padding-left: 0.25em;
+    label {
+        padding-left: 1px;
+    }
+}
+
 // --- ylläpito
 
 .hallinnan_rivi {
