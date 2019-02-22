@@ -151,7 +151,7 @@ def viesti_uusi():
             sanoma = "Lorem ipsum"
         )
     
-    viesti = Viesti(form.otsikko.data, form.sisalto.data, "null")
+    viesti = Viesti(form.otsikko.data, form.sisalto.data, None)
     viesti.kayttaja_id = current_user.id
 
     db.session().add(viesti)
@@ -192,7 +192,7 @@ def vastaus_uusi(viesti_id):
             viesti = viesti
         )
      
-    vastaus = Viesti("null", form.sisalto.data, int(viesti_id))
+    vastaus = Viesti(None, form.sisalto.data, int(viesti_id))
     vastaus.kayttaja_id = current_user.id
 
     db.session().add(vastaus)
