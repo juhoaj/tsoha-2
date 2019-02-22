@@ -3,21 +3,25 @@
 
 {% include 'includes/header.html' %}
 
-<div class="tagilista" >
+<div class="alanavi" >
     <a href="{{ url_for('index') }} ">&lsaquo;Takaisin</a> |&nbsp;  </a>
     <p>Omat asetukset</p>
 </div>
+<hr>
+<a class="btn btn-primary btn-sm" href="{{url_for('kayttaja_muokkaa_salasana', kayttaja_id=kayttaja.id) }}" >Vaihda salasana</a>
+<hr>
 <form method="POST" action="{{ url_for('kayttaja_paivita_admin', kayttaja_id=kayttaja.id) }}">
-    <p>
+    <p style="display: inline-block;">
         {% if current_user.yllapitaja is sameas true %}
             Olet ylläpitäjä
         {% else %}
             Et ole ylläpitäjä
         {% endif %}
     </p>
-    <input style="display: none;"type="text" name="name" value="vaihda"/>
-    <input type="submit" value="Vaihda"/>
+    <input style="display: none;"type="text" name="admin" value="vaihda"/>
+    <input type="submit" value="Vaihda" class="btn btn-primary btn-sm"/>
 </form>
+<hr>
 
 
 

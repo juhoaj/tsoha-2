@@ -3,11 +3,7 @@
 
 {% include 'includes/header.html' %}
 
-<form method="POST" action="{{ url_for('viesti_uusi') }}">
-        <div class="form-group">
-            {{ form.otsikko.label }}
-            {{ form.otsikko(class_="form-control") }}
-        </div>
+<form method="POST" action="{{ url_for('vastaus_uusi', viesti_id=viesti.id) }}">
         <div class="form-group">
             {{ form.sisalto.label }}
             {{ form.sisalto(class_="form-control", rows='10') }}
@@ -20,14 +16,11 @@
         </div>
         {% endif %}
 
-        <label>Taagit</label>
-        {{ form.tagit(size=30, maxlength=50) }}
-
-        <button type="submit" value="Lisää uusi viesti" class="btn btn-link float-right">Lähetä viesti</button>
+        <button type="submit" value="Lisää uusi vastaus" class="btn btn-link float-right">Lähetä viesti</button>
     </form>
-    {% if viesti is defined %}
+    {% if sanoma is defined %}
     <div class="alert alert-primary" role="alert">
-        {{ viesti }}
+        {{ sanoma }}
     </div>
     {% endif %}
 

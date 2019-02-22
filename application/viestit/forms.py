@@ -12,9 +12,15 @@ class MultiCheckboxField(QuerySelectMultipleField):
     option_widget = widgets.CheckboxInput()
 
 class ViestiForm(FlaskForm):
-    otsikko = StringField("Viestin otsikko", [validators.Length(min=2)])
-    sisalto = TextAreaField("Viestin sisältö", [validators.Length(max=2000)])
+    otsikko = StringField("Otsikko", [validators.Length(min=2)])
+    sisalto = TextAreaField("Sisältö", [validators.Length(max=2000)])
 
     tagit = MultiCheckboxField(get_label='nimi')
+    class Meta:
+        csrf = False
+
+class VastausForm(FlaskForm):
+    sisalto = TextAreaField("Sisältö", [validators.Length(max=2000)])
+
     class Meta:
         csrf = False

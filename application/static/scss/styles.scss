@@ -31,6 +31,12 @@ nav {
     padding: 0;
 }
 
+.alanavi {
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    p, a { display: inline-block}
+}
+
 
 // --- kirjautuminen
 
@@ -40,16 +46,6 @@ nav {
         border: 1px solid $hentoharmaa;
         padding: 2rem;
     }
-}
-
-
-
-// --- tagilista
-
-.tagilista {
-    margin-bottom: 2rem;
-    display: inline-block;
-    p { display: inline-block}
 }
 
 
@@ -75,3 +71,11 @@ nav {
     }
    
 }
+
+// --- ylläpito
+
+.tagirivi {
+    form {display: inline-block;}
+}
+
+// 

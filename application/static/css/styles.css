@@ -15,17 +15,17 @@ nav {
 .navbar {
   padding: 0; }
 
+.alanavi {
+  margin-bottom: 1.5rem;
+  display: inline-block; }
+  .alanavi p, .alanavi a {
+    display: inline-block; }
+
 .kirjautuminen {
   margin-top: 3rem; }
   .kirjautuminen form {
     border: 1px solid #D8D8D8;
     padding: 2rem; }
-
-.tagilista {
-  margin-bottom: 2rem;
-  display: inline-block; }
-  .tagilista p {
-    display: inline-block; }
 
 .viestirivi {
   border-top: 1px solid #D8D8D8; }
@@ -40,3 +40,6 @@ nav {
     padding-left: 0.75rem;
     padding-right: 0.75rem;
     margin: 0; }
+
+.tagirivi form {
+  display: inline-block; }

@@ -1,8 +1,8 @@
 {% block body %}
 
 <div class="row">
-    <div class="col-12 tagilista">
-        <p class="tagilista">
+    <div class="col-12 alanavi">
+        <p class="">
             {% for tagi in tagit %}
                 <a href="/tagi/{{tagi.id}}">#{{tagi.nimi}}</a>&nbsp;
             {% endfor %}

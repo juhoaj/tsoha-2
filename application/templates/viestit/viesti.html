@@ -6,16 +6,29 @@
 <h1>{{ viesti.otsikko }}</h1>
 <p class="meta small">
     {% for tagi in tagit %}
-        <a href="/tagi/{{tagi.id}}">#{{tagi.nimi}}</a>&nbsp;
+        <a href="/tagi/{{tagi.id}}">#{{tagi.nimi}}</a>
     {% endfor %}
-    {{ kayttaja.kayttajanimi }} &nbsp;
-    {{ viesti.luotu }}
+    <br>
+    @{{ kayttaja.kayttajanimi }} 
+    | {{ viesti.luotu }}
 </p>
 
 <p class="sisalto"> {{viesti.sisalto}}</p>
 
 <hr>
 
-<p>+ uusi vastaus</p>
+{% for vastaus in vastaukset %}
+    <p class="meta small">
+        @{{ vastaus.kayttajanimi }} 
+        | {{ vastaus.luotu }}
+    </p>
+    <p class="sisalto"> {{vastaus.sisalto}}</p>
+    <hr>
+
+{% endfor %}
+
+
+
+<a href="{{url_for('vastaus_muokkaa_uusi', viesti_id=viesti.id)}}">+uusi vastaus</a>
 
 {% endblock %}

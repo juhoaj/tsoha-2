@@ -5,11 +5,11 @@ from sqlalchemy.sql import text, func, exists
 
 from application.viestit.models import Viesti
 from application.tagit.models import Tagi, Tagitus, Seuratut
-from application.viestit.forms import ViestiForm
+from application.viestit.forms import ViestiForm, VastausForm
 
 @app.route("/")
 def index():
-    return render_template("viestit/index.html", viestit = Viesti.query.all(), tagit=Tagi.query.all())
+    return render_template("viestit/index.html", viestit = Viesti.query.filter_by(vastaus_idlle = "null"), tagit=Tagi.query.all())
 
 # näyttää viestit tagista #
 @app.route("/tagi/<tagi_id>")
@@ -36,7 +36,7 @@ def tagi(tagi_id):
 
 # ottaa vastaan tagin seuraamisen ja muuttaa sen tilaa
 @app.route("/tagi/<int:tagi_id>", methods=["POST"])
-# login_required
+@login_required
 def tagi_seuraa(tagi_id):
     
     t = request.form.get("seuraa")
@@ -58,22 +58,33 @@ def omat():
 # viestin # näyttäminen
 @app.route("/viesti/<viesti_id>")
 def viesti(viesti_id):
-
+    # haetaan viestin tagit
     stmt=text(" SELECT DISTINCT tagi.id, tagi.nimi FROM tagitus, tagi " 
               " WHERE tagitus.viesti_id = :viesti_id "
               " AND tagi.id = tagitus.tagi_id ").params(viesti_id=viesti_id)
-    res = db.engine.execute(stmt)
+    res1 = db.engine.execute(stmt)
     tagit = []
-    for row in res:
-        tagit.append({"id":row[0], "nimi":row[1]})
+    for row in res1:
+        tagit.append({"nimi":row[1]})
      
+    # haetaan viestin sisältö
     viesti = Viesti.query.get(viesti_id)
- 
+
+    # haetaan viestin luonut käyttäjä
     stmt=text(" SELECT kayttaja.kayttajanimi FROM kayttaja " 
               " WHERE kayttaja.id = :kayttaja_id " ).params(kayttaja_id=viesti.kayttaja_id)
     kayttaja=db.engine.execute(stmt).fetchone()
 
-    return render_template("viestit/viesti.html", viesti=viesti, tagit=tagit, kayttaja=kayttaja )   
+    # haetaan vastaukset ja liitetään niihin käyttäjät
+    stmt=text(" SELECT * FROM viesti, kayttaja  " 
+              " WHERE viesti.kayttaja_id = kayttaja.id " 
+              " AND viesti.vastaus_idlle = :id ").params(id=viesti.id)
+    res2 = db.engine.execute(stmt)
+    vastaukset = []
+    for row in res2:
+        vastaukset.append({"luotu":row[0], "id":row[1], "sisalto":row[3], "kayttajanimi":row[8]})
+
+    return render_template("viestit/viesti.html", viesti=viesti, tagit=tagit, kayttaja=kayttaja, vastaukset=vastaukset )   
 
 # uusi viesti-näkymä
 @app.route("/viesti/uusi")
@@ -83,7 +94,7 @@ def viesti_muokkaa_uusi():
 
     form = ViestiForm()
     form.tagit.query = Tagi.query.all()
-    return render_template("viestit/uusi.html", form=form)
+    return render_template("viestit/uusiViesti.html", form=form)
 
 # uusi viesti-vastaanotto
 @app.route("/viesti", methods=["POST"])
@@ -93,9 +104,9 @@ def viesti_uusi():
     form.tagit.query = Tagi.query.all()
     
     if not form.validate():
-        return render_template("viestit/uusi.html", form = form, viesti = "Lorem ipsum")
+        return render_template("viestit/uusiViesti.html", form = form, sanoma = "Lorem ipsum")
     
-    viesti = Viesti(form.otsikko.data, form.sisalto.data)
+    viesti = Viesti(form.otsikko.data, form.sisalto.data, "null")
     viesti.kayttaja_id = current_user.id
 
     db.session().add(viesti)
@@ -110,3 +121,29 @@ def viesti_uusi():
         db.engine.execute(stmt)
 
     return redirect(url_for("index"))
+
+# uusi vastaus-näkymä
+@app.route("/viesti/<viesti_id>/uusivastaus")
+@login_required
+def vastaus_muokkaa_uusi(viesti_id):
+    form = VastausForm()
+    viesti = Viesti.query.get(viesti_id)
+    return render_template("viestit/uusiVastaus.html", form=form, viesti=viesti)
+
+# uusi vastaus-vastaanotto
+@app.route("/viesti/<viesti_id>", methods=["POST"])
+@login_required
+def vastaus_uusi(viesti_id):
+    form = VastausForm(request.form)
+    viesti = Viesti.query.get(viesti_id)
+    
+    if not form.validate():
+        return render_template("viestit/uusiVastaus.html", form = form, sanoma = "Lorem ipsum", viesti = viesti)
+     
+    vastaus = Viesti("null", form.sisalto.data, int(viesti_id))
+    vastaus.kayttaja_id = current_user.id
+
+    db.session().add(vastaus)
+    db.session().commit()
+
+    return redirect(url_for("viesti", viesti_id = viesti_id))

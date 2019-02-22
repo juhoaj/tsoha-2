@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block body %}
+
+{% include 'includes/header.html' %}
+
+<div class="alanavi" >
+    <a href="{{ url_for('yllapito') }} ">&lsaquo;Takaisin</a> |&nbsp;  </a>
+    <p>Taagin ylläpito | Käyttäjät</p>
+</div>
+
+{% if sanoma is defined %}
+    <div class="alert alert-primary" role="alert">
+        {{ sanoma }}
+    </div>
+{% endif %}
+
+{% for kayttaja in kayttajat %}
+
+    <li class="hallinnan_rivi">
+        {{ kayttaja.kayttajanimi }} 
+        
+        <form method="POST" action="{{ url_for('kayttaja_poista', kayttaja_id=kayttaja.id) }}">
+            <input style="display: none;" type="text" name="poista" value="poistele"/>
+            <input type="submit" value="poista" class="btn btn-primary btn-sm"/>
+        </form> 
+    </li>
+  
+{% endfor %}
+
+{% endblock %}

@@ -3,10 +3,10 @@
 {% block body %}
 
 {% include 'includes/header.html' %}
-    <form class="tagilista" method="POST" action="{{ url_for('tagi_seuraa', tagi_id=tagi.id) }}">
-        <a href="{{ url_for('index') }} ">&lsaquo;Takaisin</a> |&nbsp; 
-        </a><p>#{{ tagi.nimi }}</p>
-    </form>
+<div class="alanavi" >
+    <a href="{{ url_for('index') }} ">&lsaquo;Takaisin</a> |&nbsp;  </a>
+    <p>#{{ tagi.nimi }}</p>
+</div>
 
 {% include 'includes/uusiviesti.html' %}
 {% include 'includes/viestilista.html' %}

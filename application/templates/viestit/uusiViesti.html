@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block body %}
+
+{% include 'includes/header.html' %}
+
+<form method="POST" action="{{ url_for('viesti_uusi') }}">
+        <div class="form-group">
+            {{ form.otsikko.label }}
+            {{ form.otsikko(class_="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.sisalto.label }}
+            {{ form.sisalto(class_="form-control", rows='10') }}
+        </div>
+        {% if error is defined %}
+        <div class="alert alert-primary" role="alert">
+                {% for error in form.otsikko.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+        </div>
+        {% endif %}
+
+        <label>Taagit</label>
+        {{ form.tagit(size=30, maxlength=50) }}
+
+        <button type="submit" value="Lisää uusi viesti" class="btn btn-link float-right">Lähetä viesti</button>
+    </form>
+    {% if sanoma is defined %}
+    <div class="alert alert-primary" role="alert">
+        {{ sanoma }}
+    </div>
+    {% endif %}
+
+    {% endblock %}

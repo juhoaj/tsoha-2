@@ -11,6 +11,8 @@ Huom! html-templatet ovat pakkauksiensa nimisissä kansioissa nimettynä funktio
   * GET /viesti/#/lukijat näyttää viestin # lukijat
   * GET /viesti/uusi `X` kirjoitusnäkymä uudelle viestille `viesti_muokkaa_uusi`
   * POST /viesti `X` lähettää uuden viestin `viesti_uusi`
+* GET /viesti/#/uusi `X` kirjoitusnäkymä uudelle vastaukselle `vastraus_muokkaa_uusi`
+  * POST /viesti/# `X` lähettää uuden vastauksen viestille # `vastaus_uusi`
   * GET /haku näyttää haun tulokset
   * POST /haku lähettää uuden haun
 

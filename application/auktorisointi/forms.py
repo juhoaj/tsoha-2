@@ -10,9 +10,16 @@ class LoginForm(FlaskForm):
 
 class SignupForm(FlaskForm):
     kayttajanimi = StringField("Haluamasi käyttäjänimi")
-    salasana = PasswordField("Anna alasana")
-    toistettuSalasana = PasswordField("Toista alasana")
-    # vahvistaSalasana = PasswordField("Salasana uudestaan")
+    salasana = PasswordField("Anna salasana")
+    toistettuSalasana = PasswordField("Toista salasana")
+    
+    class Meta:
+        csrf = False
+
+class ChangePasswordForm(FlaskForm):
+    nykyinenSalasana = PasswordField("Nykyinen salasana")
+    salasana = PasswordField("Anna salasana")
+    toistettuSalasana = PasswordField("Toista salasana")
     
     class Meta:
         csrf = False
