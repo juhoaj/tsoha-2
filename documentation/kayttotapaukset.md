@@ -28,10 +28,14 @@
 ## Tekniset stoorit todo 
   * Kenttien validointi (myös ylipitkät syötteet)
   * Mahdolliset virhetilanteet tuottavat ymmärrettäviä virheviestejä. 
+  * Taaginäkymässä ei näy back
 
   * Käyttötapausten yhteydessä kuvattuna toimivat ja järkevät SQL-kyselyt
   * dokumentaatiossa CREATE TABLE -lauseet sekä indeksien lisäykset
   * SQL-virheiden käsittely
   * ei pois-kommentoitua koodia 
+  * nätimpi date
+  * suoraan tilin luomisesta kirjautuminen
+
 
   * lisätään back nappi viestiin

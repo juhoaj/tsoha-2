@@ -59,12 +59,11 @@ def tagi_poista(tagi_id):
     t = request.form.get("poista")
   
     if t == 'poistele':
-        #delete tag
-        stmt=text(" DELETE FROM tagi WHERE id = :id").params(id=tagi_id)
-        db.engine.execute(stmt)
         #deleta tags from tagitus
         stmt=text(" DELETE FROM tagitus WHERE id = :id").params(id=tagi_id)
         db.engine.execute(stmt)
         db.session().commit()
- 
+        #delete tag
+        stmt=text(" DELETE FROM tagi WHERE id = :id").params(id=tagi_id)
+        db.engine.execute(stmt)
     return redirect(url_for("tagi_hallinta"))
