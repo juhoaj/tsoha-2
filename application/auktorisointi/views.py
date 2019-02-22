@@ -126,14 +126,14 @@ def kayttaja_poista(kayttaja_id):
         sanoma="Et voi poistaa itseäsi"
         return render_template("auktorisointi/kayttaja_hallinta.html", sanoma=sanoma, kayttajat = kayttajat)
     t = request.form.get("poista")
+    
     if t == 'poistele':
-        #poista käyttäjä
-        stmt=text(" DELETE FROM kayttaja WHERE id = :id").params(id=kayttaja_id)
-        db.engine.execute(stmt)
-        
         #muuta viestien kirjoittajaksi poistettu, eli kayttaja_id=1
         stmt=text(" UPDATE viesti SET kayttaja_id = 1 WHERE kayttaja_id = :id").params(id=kayttaja_id)
         db.engine.execute(stmt)
         db.session().commit()
- 
+        #poista käyttäjä
+        stmt=text(" DELETE FROM kayttaja WHERE id = :id").params(id=kayttaja_id)
+        db.engine.execute(stmt)
+        
     return redirect(url_for("kayttaja_hallinta"))
