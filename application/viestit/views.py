@@ -11,7 +11,7 @@ from application.viestit.forms import ViestiForm, VastausForm
 # aloitussivu, ensimmäinen sivutettu sivu viesteistä
 @app.route("/")
 def index():
-    viestit = Viesti.query.filter_by(vastaus_idlle = "NULL")
+    viestit = Viesti.query.filter_by(vastaus_idlle = None)
 
     # muokataan viestit paginaatiota varten
     def get_viestit(offset=0, per_page=10):
