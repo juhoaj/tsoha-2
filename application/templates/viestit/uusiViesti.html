@@ -3,7 +3,7 @@
 
 {% include 'includes/header.html' %}
 
-<form method="POST" action="{{ url_for('viesti_uusi') }}">
+<form class="viesti-form" method="POST" action="{{ url_for('viesti_uusi') }}">
         <div class="form-group">
             {{ form.otsikko.label }}
             {{ form.otsikko(class_="form-control") }}

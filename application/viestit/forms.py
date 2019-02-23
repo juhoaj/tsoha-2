@@ -20,7 +20,7 @@ class ViestiForm(FlaskForm):
         csrf = False
 
 class VastausForm(FlaskForm):
-    sisalto = TextAreaField("Sisältö", [
+    sisalto = TextAreaField("Lisää vastaus", [
         validators.Length(min=4,max=1000, message='Vastauksen pitää olla vähintään neljä ja enintään tuhat merkkiä pitkä')
     ])
 

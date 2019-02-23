@@ -27,8 +27,31 @@
 
 {% endfor %}
 
+{% if current_user.is_authenticated %}
 
+    <form class="vastaus-form" method="POST" action="{{ url_for('vastaus_uusi', viesti_id=viesti.id) }}">
+        <div class="form-group">
+            {{ form.sisalto.label }}
+            {{ form.sisalto(class_="form-control", rows='10') }}
+        </div>
+        {% if error is defined %}
+        <div class="alert alert-primary" role="alert">
+                {% for error in form.otsikko.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+        </div>
+        {% endif %}
 
-<a href="{{url_for('vastaus_muokkaa_uusi', viesti_id=viesti.id)}}">+uusi vastaus</a>
+        <button type="submit" value="Lisää uusi vastaus" class="btn btn-link float-right">Lähetä viesti</button>
+    </form>
+    {% if sanoma is defined %}
+    <div class="alert alert-primary" role="alert">
+        {{ sanoma }}
+    </div>
+    {% endif %}
+
+{% else %}
+    <a href="{{ url_for('kirjaudu') }}">Kirjaudu sisään lisätäksesi viesti</a>
+{% endif %}
 
 {% endblock %}

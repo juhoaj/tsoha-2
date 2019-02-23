@@ -46,6 +46,29 @@ header {
 .pagination {
   margin-top: 2rem; }
 
+.meta {
+  margin-top: 1.5rem;
+  margin-bottom: 0.25rem; }
+
+.sisalto {
+  font-family: "Alegreya", "Georgia", "Times", serif;
+  font-size: 1.5rem;
+  line-height: 1.9rem;
+  margin-bottom: 1.5rem; }
+
+.vastaus-form, .viesti-form {
+  margin-top: 2.5rem; }
+  .vastaus-form input.form-control, .viesti-form input.form-control {
+    padding: 1rem;
+    font-size: 1.75rem;
+    height: 4rem;
+    font-weight: 400; }
+  .vastaus-form textarea, .viesti-form textarea {
+    font-family: "Alegreya", "Georgia", "Times", serif;
+    padding: 1rem;
+    font-size: 1.5rem;
+    line-height: 1.9rem; }
+
 #tagit {
   list-style-type: none;
   padding-left: 0.25em; }
@@ -55,5 +78,7 @@ header {
 .alert {
   clear: both; }
 
-.hallinnan_rivi form {
-  display: inline-block; }
+.hallinnan_rivi {
+  margin-bottom: 0.5rem; }
+  .hallinnan_rivi form {
+    display: inline-block; }

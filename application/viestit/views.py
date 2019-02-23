@@ -143,11 +143,15 @@ def viesti(viesti_id):
     for row in res2:
         vastaukset.append({"luotu":row[0], "id":row[1], "sisalto":row[3], "kayttajanimi":row[8]})
 
+    #vastausformi
+    form = VastausForm()
+
     return render_template("viestit/viesti.html", 
         viesti=viesti, 
         tagit=tagit, 
         kayttaja=kayttaja, 
-        vastaukset=vastaukset 
+        vastaukset=vastaukset, 
+        form=form,
     )   
 
 # uusi viesti-näkymä
@@ -189,17 +193,6 @@ def viesti_uusi():
 
     return redirect(url_for("index"))
 
-# uusi vastaus-näkymä
-@app.route("/viesti/<viesti_id>/uusivastaus")
-@login_required
-def vastaus_muokkaa_uusi(viesti_id):
-    form = VastausForm()
-    viesti = Viesti.query.get(viesti_id)
-    return render_template("viestit/uusiVastaus.html", 
-        form=form, 
-        viesti=viesti
-    )
-
 # uusi vastaus-vastaanotto
 @app.route("/viesti/<viesti_id>", methods=["POST"])
 @login_required
@@ -208,7 +201,7 @@ def vastaus_uusi(viesti_id):
     viesti = Viesti.query.get(viesti_id)
     
     if not form.validate():
-        return render_template("viestit/uusiVastaus.html", 
+        return render_template("/viesti/<viesti_id>", 
             form = form, 
             sanoma = "Vastauksen pitää olla vähintään neljä ja enintään tuhat merkkiä pitkä", 
             viesti = viesti

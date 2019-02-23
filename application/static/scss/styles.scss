@@ -75,6 +75,36 @@ header {
     margin-top: 2rem;
 }
 
+// --- viesti ja sen kirjoitus
+
+.meta {
+    margin-top: 1.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.sisalto {
+    font-family: $font-family-serif;
+    font-size: 1.5rem;
+    line-height: 1.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.vastaus-form, .viesti-form {
+    margin-top: 2.5rem;
+    input.form-control {
+        padding: 1rem;
+        font-size: 1.75rem;
+        height: 4rem;
+        font-weight: 400;
+    }
+    textarea {
+        font-family: $font-family-serif;
+        padding: 1rem;
+        font-size: 1.5rem;
+        line-height: 1.9rem;
+    }
+}
+
 // --- viestin kirjoitus
 
 
@@ -94,6 +124,7 @@ header {
 
 .hallinnan_rivi {
     form {display: inline-block;}
+    margin-bottom: 0.5rem;
 }
 
 // 
