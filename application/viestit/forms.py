@@ -9,8 +9,7 @@ class MultiCheckboxField(QuerySelectMultipleField):
 
 class ViestiForm(FlaskForm):
     otsikko = StringField("Otsikko", [
-        validators.Length(min=4,max=30, message='Otsikon pitää olla vähintään neljä ja enintään kolmekymmentä merkkiä pitkä'),
-        validators.DataRequired(),
+        validators.Length(min=4,max=40, message='Otsikon pitää olla vähintään neljä ja enintään neljäkymmentä merkkiä pitkä')
         ])
     sisalto = TextAreaField("Sisältö", [
         validators.Length(min=4,max=1000, message='Viestin pitää olla vähintään neljä ja enintään tuhat merkkiä pitkä')

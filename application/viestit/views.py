@@ -165,7 +165,7 @@ def viesti_uusi():
     if not form.validate():
         return render_template("viestit/uusiViesti.html", 
             form = form, 
-            sanoma = "Otsikon pitää olla vähintään neljä ja enintään kolmekymmentä sekä viestin vähintään neljä ja enintään tuhat merkkiä pitkä"
+            sanoma = "Otsikon pitää olla vähintään neljä ja enintään neljäkymmentä sekä viestin vähintään neljä ja enintään tuhat merkkiä pitkä"
         )
     
     viesti = Viesti(form.otsikko.data, form.sisalto.data, None)
