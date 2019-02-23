@@ -4,7 +4,7 @@
     {% if current_user.is_authenticated %}
         <a href="{{ url_for('viesti_muokkaa_uusi') }}">+lisää uusi viesti</a>
     {% else %}
-        <a href="{{ url_for('kirjaudu') }}">Kirjaudu sisään lisätäksesi viestin</a>
+        <a href="{{ url_for('kirjaudu') }}">Kirjaudu sisään lisätäksesi viesti</a>
     {% endif %}
 </p>
 

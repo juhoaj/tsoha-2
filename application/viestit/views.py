@@ -13,6 +13,21 @@ from application.viestit.forms import ViestiForm, VastausForm
 def index():
     viestit = Viesti.query.filter_by(vastaus_idlle = None)
 
+    stmt=text(
+        " SELECT tagi.id, tagi.nimi, viesteja FROM tagi "
+        " LEFT JOIN ( "
+        " SELECT tagitus.tagi_id, "
+        " COUNT(tagitus.tagi_id) AS viesteja "
+        " FROM tagitus "
+        " GROUP BY tagitus.tagi_id "
+        " ) AS subquery "
+        " ON tagi.id = subquery.tagi_id; "
+    )
+    res = db.engine.execute(stmt)
+    tagit = []
+    for row in res:
+        tagit.append({"id":row[0], "nimi":row[1], "viesteja":row[2]})
+
     # muokataan viestit paginaatiota varten
     def get_viestit(offset=0, per_page=10):
         return viestit[offset: offset + per_page]
@@ -25,7 +40,7 @@ def index():
     return render_template("viestit/index.html",
         viestit=pagination_viestit,
         page=page,
-        tagit=Tagi.query.all(),
+        tagit=tagit,
         per_page=per_page,
         pagination=pagination,
     )
@@ -34,6 +49,7 @@ def index():
 @app.route("/tagi/<tagi_id>")
 def tagi(tagi_id):
     t = Tagi.query.get(tagi_id)
+    v = Tagitus.query.filter_by(tagi_id = tagi_id).count()
 
     # haetaan viestit tagi_id:llä
     seurattu = Tagitus.query.filter_by(tagi_id=5).count()
@@ -63,6 +79,7 @@ def tagi(tagi_id):
         viestit=pagination_viestit,
         page=page,
         tagi=t,
+        viesteja=v,
         per_page=per_page,
         pagination=pagination,
     )

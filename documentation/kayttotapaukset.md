@@ -7,6 +7,19 @@
 
   * Käyttäjä näkee aloitusnäkymässä viestilistauksen (kaikkien viestien otsikoista)
     `SELECT * FROM viesti WHERE vastaus_idlle IS NULL;`
+    mukana myös viestien määrä:
+    SELECT viesti.id, viesti.otsikko, vastauksia FROM viesti
+    LEFT JOIN (
+        SELECT viesti.vastaus_idlle,
+        COUNT(viesti.vastaus_idlle) AS vastauksia
+        FROM viesti WHERE viesti.vastaus_idlle IS NOT NULL
+        GROUP BY viesti.vastaus_idlle
+    ) AS subquery
+    ON viesti.id = subquery.vastaus_idlle
+    WHERE viesti.otsikko IS NOT NULL;
+
+  * Käyttäjä näkee viestinäkymässä kaikkien tagien viestimäärän
+    `SELECT tagi.id, tagi.nimi, viestejä FROM tagi LEFT JOIN ( SELECT tagitus.tagi_id, COUNT(tagitus.tagi_id) AS viestejä FROM tagitus GROUP BY tagitus.tagi_id ) AS subquery ON tagi.id = subquery.tagi_id;`
 
   * Käyttäjä voi tarkastella tagiin liitettyjä viestejä viestilistauksessa
     `SELECT viesti.id, viesti.otsikko FROM tagitus, viesti WHERE tagitus.tagi_id = :tagi_id AND viesti.id = tagitus.viesti_id`
