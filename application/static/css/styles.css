@@ -47,5 +47,8 @@ nav {
   #tagit label {
     padding-left: 1px; }
 
+.alert {
+  clear: both; }
+
 .hallinnan_rivi form {
   display: inline-block; }
