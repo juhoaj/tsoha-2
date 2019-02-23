@@ -3,6 +3,7 @@
 <div class="row">
     <div class="col-12 alanavi">
         <p class="">
+            Kaikki viestit ({{viesteja}}) &nbsp;|&nbsp;
             {% for tagi in tagit %}
                 <a href="/tagi/{{tagi.id}}">#{{tagi.nimi}}({{tagi.viesteja}})</a>&nbsp;
             {% endfor %}

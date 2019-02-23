@@ -13,6 +13,10 @@ from application.viestit.forms import ViestiForm, VastausForm
 def index():
     viestit = Viesti.query.filter_by(vastaus_idlle = None)
 
+    viesteja = Viesti.query.filter_by(vastaus_idlle = None).count()
+
+    print(viesteja)
+
     stmt=text(
         " SELECT tagi.id, tagi.nimi, viesteja FROM tagi "
         " LEFT JOIN ( "
@@ -39,6 +43,7 @@ def index():
     pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
     return render_template("viestit/index.html",
         viestit=pagination_viestit,
+        viesteja=viesteja,
         page=page,
         tagit=tagit,
         per_page=per_page,

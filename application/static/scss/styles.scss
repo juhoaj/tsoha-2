@@ -15,11 +15,14 @@
 // --- navi ja header
 
 header {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
 }
 
-nav {
+.service_name {
     margin-top: .5rem;
+    font-size: 4rem;
+    font-family: $font-family-serif;
+    font-weight: 700;
 }
 
 .ylanavi {
@@ -27,16 +30,11 @@ nav {
     margin-top: 0.5rem;
 }
 
-.navbar {
-    padding: 0;
-}
-
 .alanavi {
     margin-bottom: 1.5rem;
     display: inline-block;
     p, a { display: inline-block}
 }
-
 
 // --- kirjautuminen
 
@@ -49,19 +47,12 @@ nav {
 }
 
 
-
 // --- viestilista
 
-.viestirivi {
-    border-top: 1px solid $hentoharmaa;
-    &:hover{
-        background-color: $hentooranssi;
-        p {
-            color: $oranssi;
-        } 
-    }
+.uusiviestirivi, .viestirivi {
+    border-bottom: 1px solid $hentoharmaa;
     p {
-        
+        font-weight: 400;
         color: $body-color;
         padding-top: 0.5rem;
         padding-bottom: 0.5rem;
@@ -69,10 +60,23 @@ nav {
         padding-right: 0.75rem;
         margin: 0;
     }
-   
+}
+
+.viestirivi {
+     &:hover{
+        background-color: $hentooranssi;
+        p {
+            color: $oranssi;
+        } 
+    }
+}
+
+.pagination {
+    margin-top: 2rem;
 }
 
 // --- viestin kirjoitus
+
 
 #tagit {
     list-style-type: none;

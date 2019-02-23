@@ -3,17 +3,17 @@
   padding: 0; }
 
 header {
-  margin-bottom: 3rem; }
+  margin-bottom: 2rem; }
 
-nav {
-  margin-top: .5rem; }
+.service_name {
+  margin-top: .5rem;
+  font-size: 4rem;
+  font-family: "Alegreya", "Georgia", "Times", serif;
+  font-weight: 700; }
 
 .ylanavi {
   text-align: right;
   margin-top: 0.5rem; }
-
-.navbar {
-  padding: 0; }
 
 .alanavi {
   margin-bottom: 1.5rem;
@@ -27,19 +27,24 @@ nav {
     border: 1px solid #D8D8D8;
     padding: 2rem; }
 
-.viestirivi {
-  border-top: 1px solid #D8D8D8; }
-  .viestirivi:hover {
-    background-color: #FEFDFA; }
-    .viestirivi:hover p {
-      color: #E08F0B; }
-  .viestirivi p {
+.uusiviestirivi, .viestirivi {
+  border-bottom: 1px solid #D8D8D8; }
+  .uusiviestirivi p, .viestirivi p {
+    font-weight: 400;
     color: #444444;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     padding-left: 0.75rem;
     padding-right: 0.75rem;
     margin: 0; }
+
+.viestirivi:hover {
+  background-color: #FEFDFA; }
+  .viestirivi:hover p {
+    color: #E08F0B; }
+
+.pagination {
+  margin-top: 2rem; }
 
 #tagit {
   list-style-type: none;
