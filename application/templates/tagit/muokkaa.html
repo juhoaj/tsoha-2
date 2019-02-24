@@ -2,11 +2,12 @@
 {% block body %}
 
 {% include 'includes/header.html' %}
-<p><a href="{{ url_for('tagi_hallinta') }}">Peru</a></p>
+<p><a href="{{ url_for('tagi_hallinta') }}"></a></p>
 <form method="POST" action="{{ url_for('tagi_paivita', tagi_id=tagi.id) }}">
     <label>uusi nimi</label>
-    {{ form.nimi }}
+    {{ form.nimi(value=tagi.nimi)}}
     <input type="submit" value="Muokkaa"/>
 </form>
+<br>
 <button>poista tagi</button>
 {% endblock %}

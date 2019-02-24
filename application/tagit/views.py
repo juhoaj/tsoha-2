@@ -41,7 +41,6 @@ def tagi_uusi():
 @login_required(role="ADMIN")
 def tagi_muokkaa(tagi_id):
     form = TagiForm(request.form)
-    
     t = Tagi.query.get(tagi_id)
     return render_template("tagit/muokkaa.html", tagi=t, form=form )   
 
