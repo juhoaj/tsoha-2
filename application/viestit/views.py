@@ -76,24 +76,13 @@ def tagi(tagi_id):
     v = Tagitus.query.filter_by(tagi_id = tagi_id).count()
 
     # haetaan viestit tagi_id:llä
-
     stmt=text(
-        " SELECT viesti.id, viesti.otsikko, vastauksia FROM viesti, tagitus "
-            " LEFT JOIN ( "
-                " SELECT viesti.vastaus_idlle, "
-                " COUNT(viesti.vastaus_idlle) AS vastauksia "
-                " FROM viesti WHERE viesti.vastaus_idlle IS NOT NULL "
-                " GROUP BY viesti.vastaus_idlle "
-            " ) AS subquery "
-            " ON viesti.id = subquery.vastaus_idlle "
-            " WHERE viesti.otsikko IS NOT NULL "
-                " AND viesti.id = tagitus.viesti_id "
-                " AND tagitus.tagi_id = :tagi_id; "
+        " SELECT viesti.id, viesti.otsikko FROM tagitus, viesti WHERE tagitus.tagi_id = :tagi_id AND viesti.id = tagitus.viesti_id"
     ).params(tagi_id=tagi_id) 
     res = db.engine.execute(stmt) 
     viestit = [] 
     for row in res:
-        viestit.append({"id":row[0], "otsikko":row[1], "vastauksia":row[2]})
+        viestit.append({"id":row[0], "otsikko":row[1]})
 
     # muokataan viestit paginaatiota varten
     def get_viestit(offset=0, per_page=10):
