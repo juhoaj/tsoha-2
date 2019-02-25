@@ -27,7 +27,7 @@
     `SELECT viesti.id, viesti.otsikko FROM tagitus, viesti WHERE tagitus.tagi_id = :tagi_id AND viesti.id = tagitus.viesti_id`
     mukana myös viestien määrä:
     ```
-    SELECT viesti.id, viesti.otsikko, vastauksia FROM viesti, tagitus
+        SELECT viesti.id, viesti.otsikko, subquery.vastauksia FROM viesti JOIN tagitus ON viesti.id = tagitus.viesti_id
         LEFT JOIN (
             SELECT viesti.vastaus_idlle,
             COUNT(viesti.vastaus_idlle) AS vastauksia
@@ -36,7 +36,6 @@
         ) AS subquery
         ON viesti.id = subquery.vastaus_idlle
         WHERE viesti.otsikko IS NOT NULL
-            AND viesti.id = tagitus.viesti_id
             AND tagitus.tagi_id = 1;
     ```
   * Käyttäjä voi lukea viestin

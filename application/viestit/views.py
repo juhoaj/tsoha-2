@@ -77,12 +77,23 @@ def tagi(tagi_id):
 
     # haetaan viestit tagi_id:llä
     stmt=text(
-        " SELECT viesti.id, viesti.otsikko FROM tagitus, viesti WHERE tagitus.tagi_id = :tagi_id AND viesti.id = tagitus.viesti_id"
+        " SELECT viesti.id, viesti.otsikko, subquery.vastauksia FROM viesti " 
+            " JOIN tagitus"  
+            " ON viesti.id = tagitus.viesti_id "
+            " LEFT JOIN ( "
+                " SELECT viesti.vastaus_idlle, "
+                " COUNT(viesti.vastaus_idlle) AS vastauksia "
+                " FROM viesti WHERE viesti.vastaus_idlle IS NOT NULL "
+                " GROUP BY viesti.vastaus_idlle "
+            " ) AS subquery "
+            " ON viesti.id = subquery.vastaus_idlle "
+            " WHERE viesti.otsikko IS NOT NULL "
+                " AND tagitus.tagi_id = :tagi_id; "
     ).params(tagi_id=tagi_id) 
     res = db.engine.execute(stmt) 
     viestit = [] 
     for row in res:
-        viestit.append({"id":row[0], "otsikko":row[1]})
+        viestit.append({"id":row[0], "otsikko":row[1], "vastauksia":row[2]} )
 
     # muokataan viestit paginaatiota varten
     def get_viestit(offset=0, per_page=10):
@@ -137,7 +148,7 @@ def viesti(viesti_id):
     res1 = db.engine.execute(stmt)
     tagit = []
     for row in res1:
-        tagit.append({"nimi":row[1]})
+        tagit.append({"id":row[0], "nimi":row[1]})
      
     # haetaan viestin sisältö
     viesti = Viesti.query.get(viesti_id)

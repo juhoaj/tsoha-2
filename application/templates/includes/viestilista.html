@@ -3,7 +3,14 @@
 <a style="display: block;" href="{{ url_for('viesti', viesti_id=viesti.id) }}">
     <div class="viestirivi d-flex">
         <p class="otsikko flex-grow-1">{{ viesti.otsikko }} </p>
-        <p class="vastauksia">{{ viesti.vastauksia }} </p>
+        <p 
+            {% if viesti.vastauksia is none %}
+                style="display: none;"
+            {% endif %}
+            class="vastauksia"
+        >
+            {{ viesti.vastauksia }} 
+        </p>
     </div>
 </a>    
 
