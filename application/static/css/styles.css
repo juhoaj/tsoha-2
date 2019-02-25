@@ -33,14 +33,22 @@ header {
 
 .uusiviestirivi, .viestirivi {
   border-bottom: 1px solid #D8D8D8; }
-  .uusiviestirivi p, .viestirivi p {
-    font-weight: 400;
-    color: #444444;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-    margin: 0; }
+
+.otsikko, .vastauksia {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  color: #444444;
+  margin-bottom: 0; }
+
+.otsikko {
+  font-weight: 500;
+  font-size: 1.25rem;
+  margin: 0; }
+
+.vastauksia {
+  color: #9A9999; }
 
 .viestirivi:hover {
   background-color: #FEFDFA; }

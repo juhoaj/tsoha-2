@@ -1,8 +1,9 @@
 {% block body %}
 {% for viesti in viestit %}
-<a href="{{ url_for('viesti', viesti_id=viesti.id) }}">
-    <div class="viestirivi">
-        <p class="large">{{ viesti.otsikko }} </p>
+<a style="display: block;" href="{{ url_for('viesti', viesti_id=viesti.id) }}">
+    <div class="viestirivi d-flex">
+        <p class="otsikko flex-grow-1">{{ viesti.otsikko }} </p>
+        <p class="vastauksia">{{ viesti.vastauksia }} </p>
     </div>
 </a>    
 

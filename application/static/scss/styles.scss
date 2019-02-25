@@ -55,15 +55,24 @@ header {
 
 .uusiviestirivi, .viestirivi {
     border-bottom: 1px solid $hentoharmaa;
-    p {
-        font-weight: 400;
-        color: $body-color;
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
-        padding-left: 0.75rem;
-        padding-right: 0.75rem;
-        margin: 0;
-    }
+}
+
+.otsikko, .vastauksia {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    color: $body-color;
+    margin-bottom: 0;
+}
+
+.otsikko {
+    font-weight: 500;
+    font-size: 1.25rem;
+    margin: 0;
+}
+.vastauksia {
+    color: $vaaleaharmaa;
 }
 
 .viestirivi {
