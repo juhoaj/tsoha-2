@@ -54,7 +54,7 @@ def kayttaja_uusi():
     if form.salasana.data != form.toistettuSalasana.data:
         return render_template("auktorisointi/kirjaudu.html", 
             form = form,
-            sanoma = "Käyttäjänimi on varattu"
+            sanoma = "Salasana ja toistettu salasana eivät vastaa toisiaan"
         )
 
     if not form.validate():
@@ -66,7 +66,12 @@ def kayttaja_uusi():
     t = Kayttaja(form.kayttajanimi.data, form.salasana.data)
     db.session().add(t)
     db.session().commit()
-    return redirect(url_for("index"))
+    user = Kayttaja.query.filter_by(kayttajanimi=form.kayttajanimi.data).first()
+    if not user:
+        return render_template("auktorisointi/kirjaudu.html", form = form,
+                               sanoma = "Käyttäjää tai salasanaa ei löydy")
+    login_user(user)
+    return redirect(url_for("index")) 
 
 # omat asetukset
 @app.route("/asetukset", methods=["GET"])
