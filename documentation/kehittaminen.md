@@ -14,12 +14,12 @@
 
 ### Asennus paikalliseen ympäristöön:
 
-* pakettien hakeminen repositiosta hakemisen jälkeen `pip install -r requirements.txt`
-* virtuaaliympäristön luonti `python3 -m venv venv` (vain pakettien hakemisen jälkeen)
+* virtuaaliympäristön luonti `python3 -m venv venv` (vain projektin hakemisen jälkeen)
 * virtuaaliympäristöjen aktivointi `source venv/bin/activate`
+* pakettien hakeminen repositiosta hakemisen jälkeen `pip install -r requirements.txt` (vain projektin hakemisen jälkeen)
 * käynnistäminen lokaalisti `python run.py`
 
-(Protip: muista deaktivoida muut mahdolliset virtuaaliympäristöt ennen pip install:ia)
+(Protip: muista deaktivoida muu mahdollinen python virtuaaliympäristö sen juuresta `deactivate` loitsulla ennen pip install:ia )
 
 ### Asennus Herokuun:
 
@@ -39,7 +39,7 @@ Pääriippuvuudet:
   * Gunicorn - sovelluksen käynnistämiseksi Herokussa
 
 
-### Frontend tooling, todo
+### Frontend tooling
 *Katselmointia varten ei tarvitse asentaa mitään*.
 
 _Frontin kääntäminen kehittämistä varten:_ 
