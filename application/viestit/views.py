@@ -9,13 +9,13 @@ from application.tagit.models import Tagi, Tagitus
 from application.auktorisointi.models import Kayttaja
 from application.viestit.forms import ViestiForm, VastausForm
 
+
 # aloitussivu, ensimmäinen sivutettu sivu viesteistä
 @app.route("/")
 def index():
-    
-    # haetaan viestit ja viritellään paginaatio
     viesteja = Viesti.query.filter_by(vastaus_idlle = None).count()
 
+    # viritellään paginaatio
     def get_viestit(offset=0, per_page=10):
         return Viesti.kaikki_viestit_vastausmaarilla()[offset: offset + per_page]
     page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page')
@@ -32,19 +32,17 @@ def index():
         pagination=pagination,
     )
 
+
 # näyttää viestit tagista #
 @app.route("/tagi/<tagi_id>")
 def tagi(tagi_id):
     t = Tagi.query.get(tagi_id)
     v = Tagitus.query.filter_by(tagi_id = tagi_id).count()
-
-    # haetaan viestit tagi_id:llä ja muokataan viestit paginaatiota varten
-
     viestit = Viesti.viestit_tagista_vastausmaarilla(tagi_id)
-    def get_viestit(offset=0, per_page=10):
-        return viestit[offset: offset + per_page]
 
     # viritellään paginaatio
+    def get_viestit(offset=0, per_page=10):
+        return viestit[offset: offset + per_page]
     page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page')
     total=len(viestit)
     pagination_viestit = get_viestit(offset=offset, per_page=per_page)
@@ -57,7 +55,6 @@ def tagi(tagi_id):
         per_page=per_page,
         pagination=pagination,
     )
-
 
 # viestin # näyttäminen
 @app.route("/viesti/<viesti_id>")
@@ -83,6 +80,7 @@ def viesti_muokkaa_uusi():
     form.tagit.query = Tagi.query.all()
     return render_template("viestit/uusiViesti.html", form=form)
 
+
 # uusi viesti-vastaanotto
 @app.route("/viesti", methods=["POST"])
 @login_required
@@ -105,6 +103,7 @@ def viesti_uusi():
     Tagitus.tallenna_viestin_tagit(form.tagit.data, viesti.id)
 
     return redirect(url_for("index"))
+
 
 # uusi vastaus-vastaanotto
 @app.route("/viesti/<viesti_id>", methods=["POST"])

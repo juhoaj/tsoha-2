@@ -4,7 +4,9 @@ from sqlalchemy.sql import text, func, exists
 
 from application import app, db, views, login_required
 from application.auktorisointi.models import Kayttaja
+from application.viestit.models import Viesti
 from application.auktorisointi.forms import LoginForm, SignupForm, ChangePasswordForm
+
 
 # kirjautuminen
 @app.route("/kirjaudu", methods=["GET", "POST"])
@@ -28,6 +30,7 @@ def kirjaudupois():
     logout_user()
     return redirect(url_for("index"))    
 
+
 # uusi käyttäjä
 @app.route("/luo_tili", methods=["GET"])
 def kayttaja_muokkaa_uusi():
@@ -35,6 +38,7 @@ def kayttaja_muokkaa_uusi():
         return redirect(url_for("index"))
 
     return render_template("auktorisointi/kayttaja_muokkaa_uusi.html", form=SignupForm())
+
 
 # luo uusi käyttäjä
 @app.route("/luo_tili", methods=["POST"])
@@ -45,19 +49,19 @@ def kayttaja_uusi():
     form = SignupForm(request.form)
     
     if Kayttaja.query.filter_by(kayttajanimi = form.kayttajanimi.data).count() > 0:
-        return render_template("auktorisointi/kirjaudu.html", 
+        return render_template("auktorisointi/kayttaja_muokkaa_uusi.html", 
             form = form,
             sanoma = "Käyttäjänimi on varattu"
         )
 
     if form.salasana.data != form.toistettuSalasana.data:
-        return render_template("auktorisointi/kirjaudu.html", 
+        return render_template("auktorisointi/kayttaja_muokkaa_uusi.html", 
             form = form,
             sanoma = "Salasana ja toistettu salasana eivät vastaa toisiaan"
         )
 
     if not form.validate():
-        return render_template("auktorisointi/kirjaudu.html", 
+        return render_template("auktorisointi/kayttaja_muokkaa_uusi.html", 
             form = form, 
             sanoma = "Käyttäjänimen ja salasanan pitää olla vähintään neljä ja enintään kaksikymmentä merkkiä pitkä"
         )
@@ -67,16 +71,18 @@ def kayttaja_uusi():
     db.session().commit()
     user = Kayttaja.query.filter_by(kayttajanimi=form.kayttajanimi.data).first()
     if not user:
-        return render_template("auktorisointi/kirjaudu.html", form = form,
+        return render_template("auktorisointi/kayttaja_muokkaa_uusi.html", form = form,
                                sanoma = "Käyttäjää tai salasanaa ei löydy")
     login_user(user)
     return redirect(url_for("index")) 
+
 
 # omat asetukset
 @app.route("/asetukset", methods=["GET"])
 @login_required(role="ANY")
 def kayttaja():
     return render_template("auktorisointi/kayttaja.html", kayttaja = current_user)
+
 
 # ylläpitäjuuden paivitys
 @app.route("/asetukset/<kayttaja_id>/admin", methods=["POST"])
@@ -91,6 +97,7 @@ def kayttaja_paivita_admin(kayttaja_id):
     db.session().commit()
     return redirect(url_for("kayttaja"))
 
+
 # salasanan muokkaus
 @app.route("/asetukset/<kayttaja_id>/paivita_salasana", methods=["GET"])
 @login_required(role="ANY")
@@ -99,6 +106,7 @@ def kayttaja_muokkaa_salasana(kayttaja_id):
     # t = Kayttaja.query.get(kayttaja_id)
     # db.session().commit()
     return render_template("auktorisointi/kayttaja_muokkaa.html", form=ChangePasswordForm() )   
+
 
 # salasanan päivitys
 @app.route("/asetukset/<kayttaja_id>/salasana", methods=["POST"])
@@ -122,12 +130,14 @@ def kayttaja_paivita_salasana(kayttaja_id):
     db.session().commit()
     return redirect(url_for("kayttaja"))
 
+
 # ylläpito
 @app.route("/hallinta", methods=["GET"])
 @login_required(role="ADMIN")
 def yllapito():
     t = Kayttaja.query.get(1)
     return render_template("auktorisointi/yllapito.html", kayttaja = t)
+
 
 # käyttäjien listaus
 @app.route("/hallinta/kayttajat", methods=["GET"])
@@ -136,24 +146,29 @@ def kayttaja_hallinta():
     kayttajat = Kayttaja.query.filter(Kayttaja.id != 1)
     return render_template("auktorisointi/kayttaja_hallinta.html", kayttajat = kayttajat)
 
+
 # käyttäjän poisto
 @app.route("/asetukset/<kayttaja_id>/poista", methods=["POST"])
 @login_required(role="ANY")
 def kayttaja_poista(kayttaja_id):
+    #tarkistetaan että ylläpitäjä
+    if current_user.yllapitaja == False:
+        return redirect(url_for("index"))
+
+
     #tarkistetaan ettei poisteta itseä
     if int(kayttaja_id) == current_user.id:
         kayttajat = Kayttaja.query.all()
         sanoma="Et voi poistaa itseäsi"
         return render_template("auktorisointi/kayttaja_hallinta.html", sanoma=sanoma, kayttajat = kayttajat)
+
     t = request.form.get("poista")
     
     if t == 'poistele':
-        #muuta viestien kirjoittajaksi poistettu, eli kayttaja_id=1
-        stmt=text(" UPDATE viesti SET kayttaja_id = 1 WHERE kayttaja_id = :id").params(id=kayttaja_id)
-        db.engine.execute(stmt)
-        db.session().commit()
-        #poista käyttäjä
-        stmt=text(" DELETE FROM kayttaja WHERE id = :id").params(id=kayttaja_id)
-        db.engine.execute(stmt)
+
+        poistettavaKayttaja = Kayttaja.query.filter_by(id=kayttaja_id).first()
+        db.session.delete(poistettavaKayttaja)
+        db.session.commit()
+        Viesti.vaihda_viestien_luojaa(poistettavaKayttaja.id)
         
     return redirect(url_for("kayttaja_hallinta"))

@@ -63,8 +63,6 @@ class Viesti(Base):
 
         return viestit
 
-
-
     @staticmethod
     def kaikki_vastaukset_kayttajanimilla(viesti_id):
         stmt=text(" SELECT * FROM viesti, kayttaja  " 
@@ -75,4 +73,10 @@ class Viesti(Base):
         for row in res2:
             vastaukset.append({"luotu":row[0], "id":row[1], "sisalto":row[3], "kayttajanimi":row[8]})
         return vastaukset
+
+    @staticmethod
+    def vaihda_viestien_luojaa(kayttaja_id):
+        stmt=text(" UPDATE viesti SET kayttaja_id = 1 WHERE kayttaja_id = :id").params(id=kayttaja_id)
+        db.engine.execute(stmt)
+        db.session().commit()
 
