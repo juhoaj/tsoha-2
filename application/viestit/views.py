@@ -71,26 +71,21 @@ def viesti(viesti_id):
     )   
 
 # uusi viesti-näkymä
-@app.route("/viesti/uusi")
+@app.route("/viesti/uusi" , methods=["GET", "POST"])
 @login_required
-def viesti_muokkaa_uusi():
-    tagit = Tagi.query.all()
+def uusi_viesti():
 
-    form = ViestiForm()
-    form.tagit.query = Tagi.query.all()
-    return render_template("viestit/uusiViesti.html", form=form)
-
-
-# uusi viesti-vastaanotto
-@app.route("/viesti", methods=["POST"])
-@login_required
-def viesti_uusi():
     form = ViestiForm(request.form)
+    # tagit = Tagi.query.all()
     form.tagit.query = Tagi.query.all()
+    print(form.tagit)
     
+    if request.method == "GET":
+        return render_template("viestit/uusi_viesti.html", form=form)
+
     if not form.validate():
-        return render_template("viestit/uusiViesti.html", 
-            form = form, 
+        return render_template("viestit/uusi_viesti.html", 
+            form =form, 
             sanoma = "Otsikon pitää olla vähintään neljä ja enintään neljäkymmentä sekä viestin vähintään neljä ja enintään tuhat merkkiä pitkä"
         )
     
@@ -108,7 +103,7 @@ def viesti_uusi():
 # uusi vastaus-vastaanotto
 @app.route("/viesti/<viesti_id>", methods=["POST"])
 @login_required
-def vastaus_uusi(viesti_id):
+def uusi_vastaus(viesti_id):
     form = VastausForm(request.form)
     viesti = Viesti.query.get(viesti_id)
     

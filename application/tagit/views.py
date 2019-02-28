@@ -6,56 +6,70 @@ from application import app, db, views, login_required
 from application.tagit.models import Tagi
 from application.tagit.forms import TagiForm
 
+
 # tagien hallinta
-@app.route("/hallinta/tagit/", methods=["GET"])
+@app.route("/yllapito/tagit/", methods=["GET"])
 @login_required(role="ADMIN")
-def tagi_hallinta():
-    return render_template("tagit/tagi_hallinta.html", tagit = Tagi.query.all())
+def tagien_hallinta():
+    return render_template("tagit/tagien_hallinta.html", tagit = Tagi.query.all())
+
 
 # uusi tagi
-@app.route("/hallinta/tagit/uusi")
+@app.route("/yllapito/tagit/uusi", methods=["GET", "POST"])
 @login_required(role="ADMIN")
-def tagi_muokkaa_uusi():
-    return render_template("tagit/uusi.html", form=TagiForm())
+def uusi_tagi():
 
-@app.route("/hallinta/tagit", methods=["POST"])
-@login_required(role="ADMIN")
-def tagi_uusi():
     form = TagiForm(request.form)
 
+    if request.method == "GET":
+        return render_template("tagit/uusi_tagi.html", form=form)
+
     if not form.validate():
-        return render_template("tagit/uusi.html", 
+        return render_template("tagit/uusi_tagi.html", 
             form = form, 
             sanoma = "Taagin pitää olla vähintään neljä ja enintään kymmenen merkkiä pitkä"
         )
-
+    if Tagi.query.filter_by(nimi = form.nimi.data).count() > 0:
+        return render_template("tagit/uusi_tagi.html", 
+            form = form,
+            sanoma = "Taaginimi on jo käytössä"
+        )
     tagi = Tagi(form.nimi.data,)
     db.session().add(tagi)
     db.session().commit()
 
-    return redirect(url_for("tagi_hallinta"))
+    return redirect(url_for("tagien_hallinta"))
 
 
 # tagin muokkauksen näkymä
-@app.route("/hallinta/tagit/<tagi_id>/muokkaa")
+@app.route("/yllapito/tagit/<tagi_id>/muokkaa", methods=["GET", "POST"])
 @login_required(role="ADMIN")
-def tagi_muokkaa(tagi_id):
+def muokkaa_tagi(tagi_id):
     form = TagiForm(request.form)
-    t = Tagi.query.get(tagi_id)
-    return render_template("tagit/muokkaa.html", tagi=t, form=form )   
+    if request.method == "GET":
+        
+        t = Tagi.query.get(tagi_id)
+        return render_template("tagit/muokkaa_tagi.html", tagi=t, form=form )   
 
-# tagin poiston vastaanotto
-@app.route("/hallinta/tagit/<tagi_id>", methods=["POST"])
-@login_required(role="ADMIN")
-def tagi_paivita(tagi_id):
+    if not form.validate():
+        return render_template("tagit/uusi_tagi.html", 
+            form = form, 
+            sanoma = "Taagin pitää olla vähintään neljä ja enintään kymmenen merkkiä pitkä"
+        )
+    if Tagi.query.filter_by(nimi = form.nimi.data).count() > 0:
+        return render_template("tagit/uusi_tagi.html", 
+            form = form,
+            sanoma = "Taaginimi on jo käytössä"
+        )
     t = Tagi.query.get(tagi_id)
     t.nimi = request.form.get("nimi")
     db.session().commit()
 
-    return redirect(url_for("tagi_hallinta"))
+    return redirect(url_for("tagien_hallinta"))
+
 
 # tagin poisto
-@app.route("/hallinta/tagit/<tagi_id>/poista", methods=["POST"])
+@app.route("/yllapito/tagit/<tagi_id>/poista", methods=["POST"])
 @login_required(role="ADMIN")
 def tagi_poista(tagi_id):
     t = request.form.get("poista")
@@ -63,4 +77,4 @@ def tagi_poista(tagi_id):
     if t == 'poistele':
         Tagi.poista_tagi(tagi_id)
         
-    return redirect(url_for("tagi_hallinta"))
+    return redirect(url_for("tagien_hallinta"))

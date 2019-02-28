@@ -4,7 +4,7 @@
         <div class="col-12 ylanavi">
             {% if current_user.is_authenticated %}
             <p class="small"> Moi {{ current_user.kayttajanimi }} |
-                <a href="{{ url_for('kayttaja') }}">omat asetukset</a> |
+                <a href="{{ url_for('asetukset') }}">omat asetukset</a> |
                 {% if current_user.yllapitaja is sameas true %}
                     <a href="{{ url_for('yllapito') }}">Taagin hallinta</a> |
                 {% endif %}

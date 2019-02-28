@@ -2,8 +2,8 @@
 {% block body %}
 
 {% include 'includes/header.html' %}
-<p><a href="{{ url_for('tagi_hallinta') }}"></a></p>
-<form method="POST" action="{{ url_for('tagi_paivita', tagi_id=tagi.id) }}">
+<p><a href="{{ url_for('tagien_hallinta') }}"></a></p>
+<form method="POST" action="{{ url_for('muokkaa_tagi', tagi_id=tagi.id) }}">
     <label>uusi nimi</label>
     {{ form.nimi(value=tagi.nimi)}}
     <input type="submit" value="Muokkaa"/>

@@ -8,9 +8,9 @@
     <p>Omat asetukset</p>
 </div>
 <hr>
-<a class="btn btn-primary btn-sm" href="{{url_for('kayttaja_muokkaa_salasana', kayttaja_id=kayttaja.id) }}" >Vaihda salasana</a>
+<a class="btn btn-primary btn-sm" href="{{url_for('muokkaa_salasana', kayttaja_id=kayttaja.id) }}" >Vaihda salasana</a>
 <hr>
-<form method="POST" action="{{ url_for('kayttaja_paivita_admin', kayttaja_id=kayttaja.id) }}">
+<form method="POST" action="{{ url_for('muuta_adminiksi', kayttaja_id=kayttaja.id) }}">
     <p style="display: inline-block;">
         {% if current_user.yllapitaja is sameas true %}
             Olet ylläpitäjä

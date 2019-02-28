@@ -54,6 +54,7 @@ class Tagi(Base):
         stmt=text(" DELETE FROM tagi WHERE id = :id").params(id=tagi_id)
         db.engine.execute(stmt)
 
+
 class Tagitus(db.Model):
     __tablename__ = 'tagitus'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)

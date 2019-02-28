@@ -3,9 +3,9 @@
 
 {% include 'includes/header.html' %}
 
-<p><a href="{{ url_for('tagi_hallinta') }}">Peru</a></p>
+<p><a href="{{ url_for('tagien_hallinta') }}">Peru</a></p>
 
-<form method="POST" action="{{ url_for('tagi_uusi') }}">
+<form method="POST" action="{{ url_for('uusi_tagi') }}">
     <label>Taagin nimi</label>
     {{ form.nimi }}
     <input type="submit" value="Lisää"/>

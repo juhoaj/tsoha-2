@@ -19,7 +19,7 @@
     <li class="hallinnan_rivi">
         {{ kayttaja.kayttajanimi }} 
         
-        <form method="POST" action="{{ url_for('kayttaja_poista', kayttaja_id=kayttaja.id) }}">
+        <form method="POST" action="{{ url_for('poista_kayttaja', kayttaja_id=kayttaja.id) }}">
             <input style="display: none;" type="text" name="poista" value="poistele"/>
             <input type="submit" value="poista" class="btn btn-primary btn-sm"/>
         </form> 

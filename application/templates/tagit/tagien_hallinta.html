@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block body %}
+
+{% include 'includes/header.html' %}
+
+<div class="alanavi">
+    <a href="{{ url_for('yllapito') }} ">&lsaquo;Takaisin</a> |&nbsp; </a>
+    <p>Taagin ylläpito | Taagien hallinta</p>
+</div>
+<p><a href="{{ url_for('uusi_tagi') }}">+lisää uusi tagi</a></p>
+<ul>
+    {% for tagi in tagit %}
+    <li class="hallinnan_rivi">
+        {{ tagi.nimi }} 
+        <a href="{{ url_for('muokkaa_tagi', tagi_id=tagi.id) }}">muokkaa</a> 
+        <form method="POST" action="{{ url_for('tagi_poista', tagi_id=tagi.id) }}">
+            <input style="display: none;" type="text" name="poista" value="poistele"/>
+            <input type="submit" value="poista" class="btn btn-primary btn-sm"/>
+        </form> 
+    </li>
+    {% endfor %}
+            
+
+</ul>
+
+{% endblock %}
