@@ -13,7 +13,9 @@
 ```
 
 ### Asennus paikalliseen ympäristöön:
+Paikallisessa ympäristössä ajaminen edellyttää Python 3:a.
 
+Asentaminen projektin juurikansioista:
 * virtuaaliympäristön luonti `python3 -m venv venv` (vain projektin hakemisen jälkeen)
 * virtuaaliympäristöjen aktivointi `source venv/bin/activate`
 * pakettien hakeminen repositiosta hakemisen jälkeen `pip install -r requirements.txt` (vain projektin hakemisen jälkeen)
@@ -32,17 +34,16 @@
 (Protip: jos lisäät pip:llä paketteja muista päivittää requirements.txt loitsula `pip freeze | grep -v pkg-resources > requirements.txt`)
 
 
+### Projektin pääriippuvuudet:
 
-Pääriippuvuudet:
   * Flask - sivujen piirtämiseen
   * SQLAlchemy - SQL-loitsinnan helpottaamiseen
   * Gunicorn - sovelluksen käynnistämiseksi Herokussa
 
 
-### Frontend tooling
-*Katselmointia varten ei tarvitse asentaa mitään*.
+### Front end tooling
 
-_Frontin kääntäminen kehittämistä varten:_ 
+Sovelluksen asentaminen Herokuun tai ajaminen ei vaadi front endin kääntämistä. Front end tarvitsee kääntää mikäli halutaan kehittää ulkoasua hydyntäen projektin nykyistä toolingia.
 
 Front-endin kääntämiseen tarvitsemat paketit haetaan NPM:llä. Kehittämistä varten paketit pitää ensin käydä hakemassa loitsimalla projektin juuressa `npm i`. 
 

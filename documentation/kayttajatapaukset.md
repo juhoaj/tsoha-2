@@ -1,13 +1,17 @@
-## Käyttäjätapaukset tehty
+## Tehdyt käyttäjätapaukset ja SQL-esimerkkilauseet
   * Käyttäjä voi luoda palveluun tunnukset
-    `INSERT INTO kayttaja (luotu, kayttajanimi, salasana, yllapitaja) VALUES (CURRENT_TIMESTAMP, "kayttajanimi", "salasana", FALSE);`
+    ```
+    INSERT INTO kayttaja (luotu, kayttajanimi, salasana, yllapitaja) 
+        VALUES (CURRENT_TIMESTAMP, "kayttajanimi", "salasana", FALSE);
+    ```
 
   * Käyttäjä voi kirjautua palveluun / palvelusta pois
-    `SELECT * FROM kayttaja WHERE kayttajanimi IS :kayttajanimi;`
+    ```
+    SELECT * FROM kayttaja WHERE kayttajanimi IS :kayttajanimi;
+    ```
 
   * Käyttäjä näkee aloitusnäkymässä viestilistauksen (kaikkien viestien otsikoista)
-    `SELECT * FROM viesti WHERE vastaus_idlle IS NULL;`
-    mukana myös viestien määrä:
+    
     ```
     SELECT viesti.id, viesti.otsikko, vastauksia FROM viesti
         LEFT JOIN (
@@ -20,14 +24,20 @@
         WHERE viesti.otsikko IS NOT NULL;
     ```
 
-  * Käyttäjä näkee viestinäkymässä kaikkien tagien viestimäärän
-    `SELECT tagi.id, tagi.nimi, viestejä FROM tagi LEFT JOIN ( SELECT tagitus.tagi_id, COUNT(tagitus.tagi_id) AS viestejä FROM tagitus GROUP BY tagitus.tagi_id ) AS subquery ON tagi.id = subquery.tagi_id;`
+  * Käyttäjä näkee aloitusnäkymässä kaikkien tagien viestimäärän
+    ````
+    SELECT tagi.id, tagi.nimi, viestejä FROM tagi 
+        LEFT JOIN ( 
+            SELECT tagitus.tagi_id, 
+            COUNT(tagitus.tagi_id) AS viestejä 
+            FROM tagitus GROUP BY tagitus.tagi_id 
+        ) AS subquery 
+        ON tagi.id = subquery.tagi_id;
+    ````
 
   * Käyttäjä voi tarkastella tagiin liitettyjä viestejä viestilistauksessa
-    `SELECT viesti.id, viesti.otsikko FROM tagitus, viesti WHERE tagitus.tagi_id = :tagi_id AND viesti.id = tagitus.viesti_id`
-    mukana myös viestien määrä:
     ```
-        SELECT viesti.id, viesti.otsikko, subquery.vastauksia FROM viesti JOIN tagitus ON viesti.id = tagitus.viesti_id
+    SELECT viesti.id, viesti.otsikko, subquery.vastauksia FROM viesti JOIN tagitus ON viesti.id = tagitus.viesti_id
         LEFT JOIN (
             SELECT viesti.vastaus_idlle,
             COUNT(viesti.vastaus_idlle) AS vastauksia
@@ -39,34 +49,72 @@
             AND tagitus.tagi_id = 1;
     ```
   * Käyttäjä voi lukea viestin
-    `SELECT * FROM viesti, kayttaja WHERE viesti.kayttaja_id = kayttaja.id AND viesti.id = :id`
+    ```
+    SELECT * FROM viesti, kayttaja 
+        WHERE viesti.kayttaja_id = kayttaja.id 
+            AND viesti.id = 2
+    ```
 
   * Käyttäjä näkee viestiä lukiessaan sen vastaukset
-    `SELECT * FROM viesti, kayttaja WHERE viesti.kayttaja_id = kayttaja.id AND viesti.vastaus_idlle = :id`
+    ```
+    SELECT * FROM viesti, kayttaja 
+        WHERE viesti.kayttaja_id = kayttaja.id 
+            AND viesti.vastaus_idlle = 2
+    ```
     
   * Kirjautunut käyttäjä voi luoda uuden viestin
-    `INSERT INTO viesti (luotu, otsikko, viesti, kayttaja_id) VALUES (CURRENT_TIMESTAMP, "otsikko", "viesti", :kayttaja_id)`
+    ```
+    INSERT INTO viesti (luotu, otsikko, viesti, kayttaja_id) 
+        VALUES (CURRENT_TIMESTAMP, "otsikko", "viesti", :2)
+    ```
 
-  * Kirjautunut käyttäjä voi viestiä kirjoittaessa liittää siihen tageja
-    `INSERT INTO tagitus (tagi_id, viesti_id) VALUES (:tagi_id, :viesti_id)` jokaiselle tagille.
+  * Kirjautunut käyttäjä voi viestiä kirjoittaessa liittää siihen tageja, jokaiselle tagille:
+    ```
+    INSERT INTO tagitus (tagi_id, viesti_id) 
+        VALUES (:tagi_id, :viesti_id)
+    ```
+     
 
   * Kirjautunut käyttäjä voi vaihtaa oman salasanansa
-    `UPDATE kayttaja SET salasana = "uusi_salasana" WHERE id=:kayttaja_id;`
+    ```
+    UPDATE kayttaja SET salasana = "uusi_salasana" 
+        WHERE id=:kayttaja_id;
+    ```
 
   * Kirjautunut käyttäjä voi muuttaa itsensä ylläpitäjäksi (jotta toteutus katselmoitavissa helpommin)
-    `UPDATE kayttaja SET yllapitaja = TRUE WHERE id=:kayttaja_id;` || `UPDATE kayttaja SET yllapitaja = FALSE WHERE id=:kayttaja_id;` 
+    ```
+    UPDATE kayttaja 
+        SET yllapitaja = TRUE 
+        WHERE id=:kayttaja_id;
+    ```
 
   * Viestilistauksen viestiä (otsikko) klikkaamalla näkee viestiketjun (koko viestin ja sen mahdolliset vastaukset)
-    `SELECT * FROM viesti WHERE vastaus_idlle = :viesti_id;`
+    ```
+    SELECT * FROM viesti WHERE vastaus_idlle = 1;
+    ```
 
   * Kirjautunut käyttäjä voi lisätä vastauksen viestiin
-    `INSERT INTO kayttaja (luotu, kayttajanimi, salasana, yllapitaja) VALUES (CURRENT_TIMESTAMP, "kayttajanimi", "salasana", FALSE);`
+    ```
+    INSERT INTO kayttaja (luotu, kayttajanimi, salasana, yllapitaja) 
+        VALUES (CURRENT_TIMESTAMP, "kayttajanimi", "salasana", FALSE);
+    ```
 
   * (Vain) ylläpitäjä näkee ylläpitäjän näkymässä käyttäjät
-    `SELECT * FROM kayttaja WHERE NOT id=1`
+    ```
+    SELECT * FROM kayttaja WHERE NOT id=1
+    ```
 
   * (Vain) ylläpitäjä voi poistaa käyttäjän (paitsi itsensä)
-    `DELETE FROM kayttaja WHERE id = :kayttaja_id`
+    ```
+    DELETE FROM kayttaja WHERE id = 2
+    ```
+    Sekä käyttäjän viestien käyttäjän vaihto
+
+
+
+
+
+    
 
   * (Vain) ylläpitäjä voi lisätä tagin
     `INSERT INTO tagi (luotu, nimi) VALUES (CURRENT_TIMESTAMP, "tagi_nimi");`
@@ -80,9 +128,11 @@
 
 
 ## Käyttäjätapaukset, jatkokehitys
-  * Käyttäjä kirjautuu automaattisesti sisään tilin luomisen jälkeen
+  * Ylläpitäjä voi asettaa toisen käyttäjän ylläpitäjäksi
+  * Käyttäjältä kysytään tiliä luotaessa sähköpostiosoite johon lähetetään tilin aktivointia varten koodi
+  * Käyttäjä voi tilata sähköpostiinsa salasanan nollaus-linkin
   * Käyttäjä näkee viestinäkymässä takaisin -napin joka vie edelliselle sivulle (etusivu tai jokin tagi-sivu)
-  * Käyttäjä nakee viestilistauksessa vastauksien lukumäärän
+  * Käyttäjällä on viestien ja vastauksien kirjoittamisessa käytössä rich text -editori
   * Käyttäjä voi valita tageja seurattavaksi
   * Käyttäjä näkee seuraamiinsa tageihin liitetyt viestit viestilistauksena
   * Viestilistausta voi rajata ajan perusteella
