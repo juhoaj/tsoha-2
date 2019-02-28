@@ -11,11 +11,6 @@ from application.viestit.forms import ViestiForm, VastausForm
 # aloitussivu, ensimmäinen sivutettu sivu viesteistä
 @app.route("/")
 def index():
-    # viestit = Viesti.query.filter_by(vastaus_idlle = None)
-
-    viesteja = Viesti.query.filter_by(vastaus_idlle = None).count()
-
-    print(viesteja)
 
     # haetaan tagit
     stmt=text(
@@ -33,33 +28,16 @@ def index():
     for row in res:
         tagit.append({"id":row[0], "nimi":row[1], "viesteja":row[2]})
 
+    # haetaan viestit ja viritellään paginaatio
+    viesteja = Viesti.query.filter_by(vastaus_idlle = None).count()
 
-    # haetaan viestit ja niiden vastaukset
-    stmt=text(
-        " SELECT viesti.id, viesti.otsikko, vastauksia FROM viesti "
-            " LEFT JOIN ( "
-                " SELECT viesti.vastaus_idlle, "
-                " COUNT(viesti.vastaus_idlle) AS vastauksia "
-                " FROM viesti WHERE viesti.vastaus_idlle IS NOT NULL "
-                " GROUP BY viesti.vastaus_idlle "
-            " ) AS subquery "
-            " ON viesti.id = subquery.vastaus_idlle "
-            " WHERE viesti.otsikko IS NOT NULL; "
-    )
-    res = db.engine.execute(stmt)
-    viestit = []
-    for row in res:
-        viestit.append({"id":row[0], "otsikko":row[1], "vastauksia":row[2]})
-
-    # muokataan viestit paginaatiota varten
     def get_viestit(offset=0, per_page=10):
-        return viestit[offset: offset + per_page]
-
-    # viritellään paginaatio
+        return Viesti.kaikki_viestit_vastausmaarilla()[offset: offset + per_page]
     page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page')
-    total=len(viestit)
+    total=viesteja
     pagination_viestit = get_viestit(offset=offset, per_page=per_page)
     pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
+    
     return render_template("viestit/index.html",
         viestit=pagination_viestit,
         viesteja=viesteja,
@@ -75,27 +53,9 @@ def tagi(tagi_id):
     t = Tagi.query.get(tagi_id)
     v = Tagitus.query.filter_by(tagi_id = tagi_id).count()
 
-    # haetaan viestit tagi_id:llä
-    stmt=text(
-        " SELECT viesti.id, viesti.otsikko, subquery.vastauksia FROM viesti " 
-            " JOIN tagitus"  
-            " ON viesti.id = tagitus.viesti_id "
-            " LEFT JOIN ( "
-                " SELECT viesti.vastaus_idlle, "
-                " COUNT(viesti.vastaus_idlle) AS vastauksia "
-                " FROM viesti WHERE viesti.vastaus_idlle IS NOT NULL "
-                " GROUP BY viesti.vastaus_idlle "
-            " ) AS subquery "
-            " ON viesti.id = subquery.vastaus_idlle "
-            " WHERE viesti.otsikko IS NOT NULL "
-                " AND tagitus.tagi_id = :tagi_id; "
-    ).params(tagi_id=tagi_id) 
-    res = db.engine.execute(stmt) 
-    viestit = [] 
-    for row in res:
-        viestit.append({"id":row[0], "otsikko":row[1], "vastauksia":row[2]} )
+    # haetaan viestit tagi_id:llä ja muokataan viestit paginaatiota varten
 
-    # muokataan viestit paginaatiota varten
+    viestit = Viesti.viestit_tagista_vastausmaarilla(tagi_id)
     def get_viestit(offset=0, per_page=10):
         return viestit[offset: offset + per_page]
 
@@ -130,13 +90,6 @@ def tagi_seuraa(tagi_id):
         tagi_id=tagi_id, 
         nappiteksti='testailumielessa')
     )
-
-
-# viestien näyttäminen omista tageista
-@app.route("/omat")
-@login_required
-def omat():
-    return render_template("viestit/omat.html")
 
 # viestin # näyttäminen
 @app.route("/viesti/<viesti_id>")
