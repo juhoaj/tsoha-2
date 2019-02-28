@@ -20,7 +20,7 @@ class Viesti(Base):
 
     def get_id(self):
         return self.id
-
+    
     @staticmethod
     def kaikki_viestit_vastausmaarilla():
         stmt=text(
@@ -62,3 +62,17 @@ class Viesti(Base):
             viestit.append({"id":row[0], "otsikko":row[1], "vastauksia":row[2]} )
 
         return viestit
+
+
+
+    @staticmethod
+    def kaikki_vastaukset_kayttajanimilla(viesti_id):
+        stmt=text(" SELECT * FROM viesti, kayttaja  " 
+              " WHERE viesti.kayttaja_id = kayttaja.id " 
+              " AND viesti.vastaus_idlle = :id").params(id=viesti_id)
+        res2 = db.engine.execute(stmt)
+        vastaukset = []
+        for row in res2:
+            vastaukset.append({"luotu":row[0], "id":row[1], "sisalto":row[3], "kayttajanimi":row[8]})
+        return vastaukset
+

@@ -50,7 +50,6 @@ def kayttaja_uusi():
             sanoma = "Käyttäjänimi on varattu"
         )
 
-
     if form.salasana.data != form.toistettuSalasana.data:
         return render_template("auktorisointi/kirjaudu.html", 
             form = form,
