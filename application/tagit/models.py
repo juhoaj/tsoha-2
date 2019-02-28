@@ -45,6 +45,15 @@ class Tagi(Base):
             tagit.append({"id":row[0], "nimi":row[1]})
         return tagit
 
+    @staticmethod
+    def poista_tagi(tagi_id):
+        stmt=text(" DELETE FROM tagitus WHERE tagi_id = :id").params(id=tagi_id)
+        db.engine.execute(stmt)
+        db.session().commit()
+
+        stmt=text(" DELETE FROM tagi WHERE id = :id").params(id=tagi_id)
+        db.engine.execute(stmt)
+
 class Tagitus(db.Model):
     __tablename__ = 'tagitus'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
