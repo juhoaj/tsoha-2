@@ -153,9 +153,11 @@ def poista_kayttaja(kayttaja_id):
     if t == 'poistele':
 
         poistettavaKayttaja = Kayttaja.query.filter_by(id=kayttaja_id).first()
+
+        Viesti.vaihda_viestien_luojaa(poistettavaKayttaja.id)
+
         db.session.delete(poistettavaKayttaja)
         db.session.commit()
         
-        Viesti.vaihda_viestien_luojaa(poistettavaKayttaja.id)
-        
+
     return redirect(url_for("kayttajien_hallinta"))
