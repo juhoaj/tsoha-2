@@ -1,3 +1,8 @@
+## Käyttäjäryhmät
+
+Sovellus lähtee oletuksesta että minimalistiselle viestintäalustalle löytyy käyttäjäryhmänsä ihmisistä jotka kaipaavat yksinkertaistettua, "sosiaalisen median konventioista vapautettua" keskustelua. 
+
+
 ## Tehdyt käyttäjätapaukset ja SQL-esimerkkilauseet
   * Käyttäjä voi luoda palveluun tunnukset
     ````
@@ -140,4 +145,3 @@
   * Viestilistausta voi rajata ajan perusteella
   * Käyttäjän lukemista viesteistä ja vastauksista pidetään kirjaa
   * Lukemattomat viestit (ja vastaukset) korostetaan käyttäjälle  
-  * Käyttäjä näkee viestiketjussa ketkä ovat nähneet viestin (ei ketkä lukeneet vastaukset)
