@@ -8,7 +8,7 @@ Jos viestillä on vastauksia näkee käyttäjä niiden lukumäärän viestilista
 
 Käyttäjän on luotava itsellensä käyttäjätili jotta hän voi lähettää uusia viestejä tai vastata viesteihin. 
 
-Foorumin ylläpitäjällä on oma näkymä jonka kautta hän näkee hallinnoida palvelun käyttäjiä ja avainsanoja.
+Foorumin ylläpitäjällä on oma näkymä jonka kautta hän voi hallinnoida palvelun käyttäjiä ja avainsanoja.
 
 Sovellus on nähtävissä osoitteessa [https://tsoha-taagi.herokuapp.com](https://tsoha-taagi.herokuapp.com)
 
