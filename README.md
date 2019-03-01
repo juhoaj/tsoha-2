@@ -15,11 +15,9 @@ Sovellus on nähtävissä osoitteessa [https://tsoha-taagi.herokuapp.com](https:
 
 ### Työn ja sovelluksen rajoitteet
 
-Nykytilassaan sovellusta ei voida ottaa laajempaan käyttöön. Se ei tallenna ja varmista käyttäjän sähköpostiosoitetta sekä käyttäjän salasanat ovat plain textinä tietokannassa. 
+Sovelluksen nykyinen kehitysversiota soveltuu suljettuun koekäyttöön jatkokehityksen tueksi. Sovellus ei tallenna ja varmista käyttäjän sähköpostiosoitetta eivätkä käyttäjän salasanat ole kryptattu. Lisäksi kirjautuneella käyttäjällä on mahdollisuus muuttaa itsensä ylläpitäjäksi katselmoinnin helpottamiseksi.
 
-Käyttöliittymää ei ole käyttäjätestattu ja on hyvin mahdollista että ensimmäisen testauksen tuloksena on, että visuaalista hierarkia pitää jumpata saavutettavuuden parantamiseksi. Nykyinen käyttöliittymä on kuitenkin perusteltu sillä kiinnostavaa on juurikin kuulla kuinka paljon hierarkiaa pitää jumpata.
-
-Sovelluksen nykyinen kehitysversiota soveltuu hyvin pienen piirin koekäyttöön jatkokehityksen tueksi. Nyt kirjautuneella käyttäjällä on mahdollisuus muuttaa itsensä ylläpitäjäksi sovelluksen katselmoinnin helpottamiseksi ja ennen koekäyttöä voisi olla järkevintä muuttaa ylläpitäjät ylläpito-oikeuksien jakajiksi. 
+Käyttöliittymää ei ole käyttäjätestattu ja on hyvin mahdollista että ensimmäisen testauksen tuloksena on, että visuaalista hierarkia pitää jumpata saavutettavuuden parantamiseksi. Nykyinen käyttöliittymä on kuitenkin perusteltu sillä kiinnostavaa on juurikin selvittää kuinka paljon hierarkiaa pitää jumpata.
 
 Nykyinen front end tooling on valittu lähinnä sen takia että se on tuttu ja siihen löytyi helposti sovellettavissa oleva pohja aiemmista projekteista. Mikäli projektia jatkokehitetään MVC-monoliittina olisi syytä tarkistella front end toolingia tarkemmin.
 
