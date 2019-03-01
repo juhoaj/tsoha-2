@@ -29,7 +29,7 @@
 
 {% if current_user.is_authenticated %}
 
-    <form class="vastaus-form" method="POST" action="{{ url_for('vastaus_uusi', viesti_id=viesti.id) }}">
+    <form class="vastaus-form" method="POST" action="{{ url_for('uusi_vastaus', viesti_id=viesti.id) }}">
         <div class="form-group">
             {{ form.sisalto.label }}
             {{ form.sisalto(class_="form-control", rows='10') }}
