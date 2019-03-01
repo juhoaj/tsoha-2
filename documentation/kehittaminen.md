@@ -1,17 +1,3 @@
-### Projektin rakenne
-
-```
-── application
-│   ├── src - sisältää frontendin lähdekoodin (scss)
-│   ├── static - sisältää frontendin lähteet (css jne.)
-│   ├── templates
-│   ... pakkaukset
-├── package.json - sisältää frontendin riippuvuudet
-├── requirements.txt - virtuaaliympäristön riippuvuudet
-├── Procfile - ohjeistus tiedoston käynnistämiseen Herokussa
-...
-```
-
 ### Asennus paikalliseen ympäristöön:
 Paikallisessa ympäristössä ajaminen edellyttää Python 3:a.
 
@@ -43,7 +29,7 @@ Asentaminen projektin juurikansioista:
 
 ### Front end tooling
 
-Sovelluksen asentaminen Herokuun tai ajaminen ei vaadi front endin kääntämistä. Front end tarvitsee kääntää mikäli halutaan kehittää ulkoasua hydyntäen projektin nykyistä toolingia.
+Sovelluksen asentaminen Herokuun tai ajaminen paikallisesti ei vaadi front endin kääntämistä. Front end tarvitsee kääntää mikäli halutaan kehittää ulkoasua hydyntäen projektin nykyistä toolingia.
 
 Front-endin kääntämiseen tarvitsemat paketit haetaan NPM:llä. Kehittämistä varten paketit pitää ensin käydä hakemassa loitsimalla projektin juuressa `npm i`. 
 
@@ -58,3 +44,18 @@ Front-endin pääriippuvuudet:
   * Sass - css-tiedostojen kääntämistä varten
   * Gulp - automatisointi 
   * Browsersync - selainikkunan päivitys
+
+
+### Projektin rakenne
+
+```
+── application
+│   ├── src - sisältää frontendin lähdekoodin (scss)
+│   ├── static - sisältää frontendin käännetyt lähteet (css jne.)
+│   ├── templates
+│   ... pakkaukset
+├── package.json - sisältää frontendin riippuvuudet
+├── requirements.txt - virtuaaliympäristön riippuvuudet
+├── Procfile - ohjeistus tiedoston käynnistämiseen Herokussa
+...
+```
