@@ -8,6 +8,13 @@
     <p>Taagin ylläpito | Taagien hallinta</p>
 </div>
 <p><a href="{{ url_for('uusi_tagi') }}">+lisää uusi tagi</a></p>
+
+{% if sanoma is defined %}
+<div class="alert alert-primary" role="alert">
+    {{ sanoma }}
+</div>
+{% endif %}
+
 <ul>
     {% for tagi in tagit %}
     <li class="hallinnan_rivi">

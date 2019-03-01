@@ -74,6 +74,14 @@ def muokkaa_tagi(tagi_id):
 def tagi_poista(tagi_id):
     t = request.form.get("poista")
   
+    if Tagi.query.count() == 1:
+        return render_template("tagit/tagien_hallinta.html", 
+            form = TagiForm(request.form),
+            sanoma = "Kaikkia tageja ei voi poistaa", 
+            tagit = Tagi.query.all()
+        )
+        
+    
     if t == 'poistele':
         Tagi.poista_tagi(tagi_id)
         
