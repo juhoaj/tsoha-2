@@ -35,17 +35,6 @@ CREATE TABLE viesti (
 ````
 
 ````
-CREATE TABLE seuratut (
-	id INTEGER NOT NULL,
-	tagi_id INTEGER NOT NULL,
-	kayttaja_id INTEGER NOT NULL,
-	PRIMARY KEY (id),
-	FOREIGN KEY(tagi_id) REFERENCES tagi (id),
-	FOREIGN KEY(kayttaja_id) REFERENCES kayttaja (id)
-);
-````
-
-````
 CREATE TABLE tagitus (
 	id INTEGER NOT NULL,
 	tagi_id INTEGER NOT NULL,

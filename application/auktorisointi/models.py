@@ -11,7 +11,6 @@ class Kayttaja(Base):
     yllapitaja = db.Column(db.Boolean, nullable=False)
 
     viestit = db.relationship("Viesti", backref='kayttaja', lazy=True)
-    viestit = db.relationship("Seuratut", backref="kayttaja")
 
     def __init__(self, nimi, salasana):
         self.kayttajanimi = nimi

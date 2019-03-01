@@ -1,6 +1,6 @@
 ## Sovelluksen pakkaukset, routet ja funktiot
 
-Huom! html-templatet ovat pakkauksiensa nimisissä kansioissa nimettynä funktion mukaan, esim. `/tagit/tagien_hallinta.html` on `tagi`-pakkauksessa olevan `tagien_hallinta`-routen käyttämä template.
+Huom! html-templatet ovat pakkauksiensa nimisissä kansioissa nimettynä funktion mukaan, esim. `/tagit/tagien_hallinta.html` on `tagit`-pakkauksen routet määrittävän `views.py` modulin `tagien_hallinta`-view function käyttämä template.
 
 `viestit` -pakkaus näyttää viestit ja hallinnoi viestejä, bonuksena haku
   * GET / näyttää kaikki viestit `index`

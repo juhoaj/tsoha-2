@@ -34,6 +34,6 @@ Hyvin ilahduttavaa oli kuinka tehokas harjoitustyöhön valittu stack oli ja lop
   * [Loppukäyttäjäohje](https://github.com/juhoaj/tsoha-2/blob/master/documentation/loppukayttajaohje.md)
   * [Asentaminen, kehittäminen ja pääriippuvuudet](https://github.com/juhoaj/tsoha-2/blob/master/documentation/kehittaminen.md)
   * [Käyttäjäryhmät ja -tarinat (toteutettu/jatkokehitys)](https://github.com/juhoaj/tsoha-2/blob/master/documentation/kayttajatapaukset.md)
-  * [Tietokantakaavio](https://github.com/juhoaj/tsoha-2/blob/master/documentation/tietokantakaavio.pdf)
+  * [Tietokantakaavio](https://github.com/juhoaj/tsoha-2/blob/master/documentation/tietokantakaavio.pdf) 
   * [Tietokantataulut](https://github.com/juhoaj/tsoha-2/blob/master/documentation/tietokantataulut.md)
   * [Sovelluksen pakkaukset, route ja funktiot](https://github.com/juhoaj/tsoha-2/blob/master/documentation/reitit.md)
