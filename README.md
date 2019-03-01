@@ -24,7 +24,7 @@ Nykyinen front end tooling on valittu lähinnä sen takia että se on tuttu ja s
 
 ### Omat kokemukset
 
-Harjoitustyössä suurimmat haasteet olivat ensiksi Pythonin kanssa sinuiksi pääseminen ja toiseksi monesta moneen suhteet SQLAlchemyn ja WTFormsin kanssa. Esimerkiksi uuden viestin näkymän checkbox listan toimimaan saaminen oli hyvin haastavaa.
+Harjoitustyössä oli muutama suurempi haaste. Alkuun Pythonin kanssa sinuiksi pääsemisessä meni aikansa ja monesta moneen suhteet SQLAlchemyn ja WTFormsin kanssa eivät olleet yksiselitteisiä. Esimerkiksi uuden viestin näkymän checkbox listan toimimaan saaminen oli hyvin haastavaa. PostgreSQL:n ja SQLite toiminnalliset eroavaisuudet olivat kaikkinensa hyvin turhauttavia.
 
 Hyvin ilahduttavaa oli kuinka tehokas harjoitustyöhön valittu stack oli ja loppua kohden sovelluksen kehittäminen tuntui hyvyin mielekkäälle. Kurssi vastasi tehokkaasti mieltäni aiemmin askartaneeseen kysymykseen "miksi monet arvostavat Pythonia ja sen ekosysteemiä backend -käytössä".
 

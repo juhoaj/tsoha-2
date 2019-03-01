@@ -29,7 +29,7 @@ Asentaminen projektin juurikansioista:
 
 ### Front end tooling
 
-Sovelluksen asentaminen Herokuun tai ajaminen paikallisesti ei vaadi front endin kääntämistä. Front end tarvitsee kääntää mikäli halutaan kehittää ulkoasua hydyntäen projektin nykyistä toolingia.
+Sovelluksen asentaminen Herokuun tai ajaminen paikallisesti ei vaadi front endin kääntämistä. Front end tarvitsee kääntää mikäli halutaan kehittää ulkoasua hyödyntäen projektin nykyistä toolingia.
 
 Front-endin kääntämiseen tarvitsemat paketit haetaan NPM:llä. Kehittämistä varten paketit pitää ensin käydä hakemassa loitsimalla projektin juuressa `npm i`. 
 
